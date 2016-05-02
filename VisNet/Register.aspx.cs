@@ -99,12 +99,12 @@ public partial class Register : System.Web.UI.Page
 
     private string SendEmail()
     {
-        var emailActivationCode = Guid.NewGuid().ToString();
+        string emailActivationCode = Guid.NewGuid().ToString();
 
         using (MailMessage mm = new MailMessage("visnet_@hotmail.com", txtEmail.Text))
         {
             mm.Subject = "VisNet Account Activation";
-            var body = "Hello " + txtUsername.Text.Trim() + ",";
+            string body = "Hello " + txtUsername.Text.Trim() + ",";
             body += "<br /><br />Please click the following link to activate your account";
             body += "<br /><a href = '" +
                     Request.Url.AbsoluteUri.Replace("Register.aspx", "Login.aspx?ActivationCode=" + emailActivationCode) +
