@@ -1,0 +1,389 @@
+body, html, form {
+    margin: 0px;
+    padding: 0px;
+}
+
+/*Background*/
+
+.Login, .Register, .Recovery, .RecoverPass {
+    background: url(http://i.imgur.com/S2VMKHh.jpg) no-repeat 0 0 scroll;
+    background-size: cover;
+    height: auto;
+    left: 0;
+    min-height: 768px;
+    min-width: 1024px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.Dashboard {
+    background: url(http://e2ua.com/data/wallpapers/139/WDF_1807346.jpg) no-repeat 0 0 scroll;
+    background-size: cover;
+    height: auto;
+    left: 0;
+    min-height: 768px;
+    min-width: 1024px;
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+
+.informatie {
+    background-color: rgba(47, 42, 111, 0.69);
+    border: none;
+    box-shadow: 0px 10px 5px rgba(47, 42, 111, 0.66), 0px -10px 5px rgba(47, 42, 111, 0.66);
+    margin-top: 300px;
+}
+
+
+
+/*LOGIN CSS*/
+
+
+
+/*Gives the LoginMenu all its Style*/
+
+.LoginMenu {
+    background-color: rgba(172, 172, 172, 0.25);
+    border: solid;
+    border-color: rgba(176, 173, 173, 0.60);
+    border-radius: 7px;
+    border-width: 2px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+    width: 370px;
+}
+
+/*Gives the LoginText all its Style*/
+
+.LoginText {
+    background-color: rgba(43, 43, 43, 0.40);
+    border: none;
+    border-radius: 3px;
+    color: rgb(193, 193, 193);
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 30px;
+    padding-left: 20px;
+}
+
+/*Gives the txtPassword of Login a little bottom border*/
+
+.Login #txtPassword {
+    margin-bottom: 15px;
+}
+
+/*Gives the Login RBT his Style*/
+
+.Login #rbtLogged {
+    color: rgba(43, 43, 43, 0.7);
+    margin-bottom: 15px;
+    margin-left: 30px;
+    margin-right: 10px;
+}
+
+/*Gives the Login RBT his Color*/
+
+.Login .color {
+    color: rgba(43, 43, 43, 0.7);
+}
+
+/*Gives the Hyper link from Login to Register Style*/
+
+.Login #hlRegister {
+    color: rgba(43, 43, 43, 0.7);
+    margin-left: 100px;
+    text-decoration: none;
+}
+
+/*Gives the Hyper link from Login to Recovery Style*/
+
+.Login #hlRecovery {
+    color: rgba(43, 43, 43, 0.7);
+    margin-left: 212px;
+    text-decoration: none;
+}
+
+/*Gives the Login Button Style*/
+
+.Login .button {
+    background-color: rgba(43, 43, 43, 0.50);
+    border: none;
+    border-radius: 3px;
+    color: rgba(176, 173, 173, 0.70);
+    display: inline;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 10px;
+}
+
+/*Gives the Error message in LoginStyle*/
+
+.Login #lblFalseID {
+    margin-top: 110px;
+}
+
+
+
+/*REGISTERY CSS*/
+
+
+
+/*Gives the RegisterMenu all its Style*/
+
+.Register .RegisterMenu {
+    background-color: rgba(172, 172, 172, 0.25);
+    border: solid;
+    border-color: rgba(176, 173, 173, 0.60);
+    border-radius: 7px;
+    border-width: 2px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 250px;
+    width: 370px;
+}
+
+/*Gives the RegisterText all its Style*/
+
+.Register .RegisterText {
+    background-color: rgba(43, 43, 43, 0.40);
+    border: none;
+    border-radius: 3px;
+    color: rgb(193, 193, 193);
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 30px;
+    padding-left: 20px;
+}
+
+/*Gives the Register Button Style*/
+
+.Register .button {
+    background-color: rgba(43, 43, 43, 0.50);
+    border: none;
+    border-radius: 3px;
+    color: rgba(176, 173, 173, 0.70);
+    display: inline;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 17px;
+}
+
+/*Gives the txtEmail in Register a little balk on the bottom*/
+
+.Register #txtEmail {
+    margin-bottom: 20px;
+}
+
+/*Gives the Error message in Register Style*/
+
+.Register #lblFalseID {
+    margin-top: 10px;
+}
+
+
+
+/*RECOVERY CSS*/
+
+
+
+/*Gives the RegisterMenu all its Style*/
+
+.Recovery .RecoveryMenu {
+    background-color: rgba(172, 172, 172, 0.25);
+    border: solid;
+    border-color: rgba(176, 173, 173, 0.60);
+    border-radius: 7px;
+    border-width: 2px;
+    height: 170px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 350px;
+    width: 370px;
+}
+
+/*Gives the RecoveryText all its Style*/
+
+.Recovery .RecoveryText {
+    background-color: rgba(43, 43, 43, 0.40);
+    border: none;
+    border-radius: 3px;
+    color: rgb(193, 193, 193);
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 30px;
+    padding-left: 20px;
+}
+
+/*Gives the Recovery Button Style*/
+
+.Recovery .button {
+    background-color: rgba(43, 43, 43, 0.50);
+    border: none;
+    border-radius: 3px;
+    color: rgba(176, 173, 173, 0.70);
+    display: inline;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+/*Gives the Error message in Recovery Style*/
+
+.Recovery #lblFalseID {
+    margin-top: 10px;
+}
+
+
+
+/*RECOVERYPASS CSS*/
+
+
+
+/*Gives the RecoveryPassMenu style*/
+
+.RecoverPass .RecoverPassMenu {
+    background-color: rgba(172, 172, 172, 0.25);
+    border: solid;
+    border-color: rgba(176, 173, 173, 0.60);
+    border-radius: 7px;
+    border-width: 2px;
+    height: 230px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 350px;
+    width: 370px;
+}
+
+/*Gives the RecoveryPass Button Style*/
+
+.RecoverPass .button {
+    background-color: rgba(43, 43, 43, 0.50);
+    border: none;
+    border-radius: 3px;
+    color: rgba(176, 173, 173, 0.70);
+    display: inline;
+    margin-left: 25px;
+    margin-right: auto;
+    margin-top: 15px;
+}
+
+
+
+/*DashBoard CSS BraceYourSelf*/
+
+
+
+.Dashboard {
+    font-family: Arial;
+}
+
+.Dashboard ul {
+        -webkit-padding-start: 0px;
+        margin-top: 0px;
+    }
+
+.Dashboard .Sidebar {
+        background-color: rgba(18, 18, 18, 0.80);
+        color: rgb(255, 255, 255);
+        float: left;
+        height: 979px;
+        margin: 0;
+        padding: 0;
+        width: 2.65%;
+    }
+
+.Dashboard li {
+    list-style: none;
+}
+
+.Dashboard .Sidebar ul {
+    padding-left: 0px;
+}
+
+.Dashboard .Sidebar img {
+        height: 34px;
+        margin-left: 8px;
+        margin-top: 8px;
+        width: 32px;
+    }
+
+.Dashboard hr {
+        border-bottom-width: 0px;
+        color: rgba(135, 135, 135, 0.60);
+        margin: 0px;
+        padding: 0px;
+    }
+
+.Dashboard .TotalBotsSidebar {
+        color: rgb(173, 173, 173);
+        float: left;
+        width: 11.13%;
+    }
+
+.Dashboard .AmountTotal {
+        background-color: rgba(18, 18, 18, 0.60);
+        float: left;
+        font-size: 12px;
+        font-weight: 500;
+        width: 100%;
+    }
+
+.Dashboard .AmountTotal ul {
+            margin-left: 10px;
+            margin-top: 10px;
+        }
+
+.Dashboard .AmountGraphs {
+        background-color: rgba(18, 18, 18, 0.40);
+        float: left;
+        height: 943px;
+        width: 100%;
+    }
+
+.Dashboard .AmountGraphs ul {
+            font-size: 14px;
+            margin-left: 10px;
+        }
+
+.Dashboard .Summary {
+        display: inline;
+        height: 200px;
+        margin-top: 0px;
+    }
+
+.Dashboard .Hr {
+        display: inline;
+        height: 200px;
+        margin-top: 50px;
+    }
+
+.Dashboard .Hr .top {
+            margin-top: 50px;
+        }
+
+.Dashboard .Summary div {
+        background-color: rgba(18, 18, 18, 0.40);
+        display: inline;
+        float: left;
+        height: 100px;
+        margin-left: 17px;
+    }
+
+.Dashboard .Summary .ConnectionsToday, .ConnectionsWeek, .ConnectionsMonth {
+        width: 13.22%;
+    }
+
+.Dashboard .Summary .OnnlineNow {
+        width: 20.3%;
+    }
+
+.Dashboard .Summary .ConnectionsTotal {
+        width: 21%;
+    }
