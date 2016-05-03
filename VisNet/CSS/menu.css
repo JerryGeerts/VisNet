@@ -109,12 +109,12 @@ body, html, form {
 
 .Login .button {
     background-color: rgba(18, 18, 18, 0.60);
-    border: none;
     color: rgb(215, 215, 215);
     display: inline;
     margin-left: 25px;
     margin-right: auto;
     margin-top: 10px;
+    border:none;
 }
 
 /*Gives the Error message in LoginStyle*/
@@ -132,10 +132,7 @@ body, html, form {
 /*Gives the RegisterMenu all its Style*/
 
 .Register .RegisterMenu {
-    background-color: rgba(172, 172, 172, 0.25);
-    border: solid;
-    border-color: rgba(176, 173, 173, 0.60);
-    border-radius: 7px;
+    background-color: rgba(18, 18, 18, 0.40);
     border-width: 2px;
     height: 400px;
     margin-left: auto;
@@ -147,10 +144,9 @@ body, html, form {
 /*Gives the RegisterText all its Style*/
 
 .Register .RegisterText {
-    background-color: rgba(43, 43, 43, 0.40);
+    background-color: rgba(18, 18, 18, 0.60);
     border: none;
-    border-radius: 3px;
-    color: rgb(193, 193, 193);
+    color: rgb(215, 215, 215);
     margin-left: 25px;
     margin-right: auto;
     margin-top: 30px;
@@ -160,14 +156,13 @@ body, html, form {
 /*Gives the Register Button Style*/
 
 .Register .button {
-    background-color: rgba(43, 43, 43, 0.50);
+    background-color: rgba(18, 18, 18, 0.60);
     border: none;
-    border-radius: 3px;
-    color: rgba(176, 173, 173, 0.70);
+    color: rgb(215, 215, 215);
     display: inline;
     margin-left: 25px;
     margin-right: auto;
-    margin-top: 17px;
+    margin-top: 20px;
 }
 
 /*Gives the txtEmail in Register a little balk on the bottom*/
@@ -191,11 +186,7 @@ body, html, form {
 /*Gives the RegisterMenu all its Style*/
 
 .Recovery .RecoveryMenu {
-    background-color: rgba(172, 172, 172, 0.25);
-    border: solid;
-    border-color: rgba(176, 173, 173, 0.60);
-    border-radius: 7px;
-    border-width: 2px;
+    background-color: rgba(18, 18, 18, 0.40);
     height: 170px;
     margin-left: auto;
     margin-right: auto;
@@ -206,10 +197,9 @@ body, html, form {
 /*Gives the RecoveryText all its Style*/
 
 .Recovery .RecoveryText {
-    background-color: rgba(43, 43, 43, 0.40);
+    background-color: rgba(18, 18, 18, 0.60);
     border: none;
-    border-radius: 3px;
-    color: rgb(193, 193, 193);
+    color: rgb(215, 215, 215);
     margin-left: 25px;
     margin-right: auto;
     margin-top: 30px;
@@ -219,14 +209,13 @@ body, html, form {
 /*Gives the Recovery Button Style*/
 
 .Recovery .button {
-    background-color: rgba(43, 43, 43, 0.50);
+    background-color: rgba(18, 18, 18, 0.60);
     border: none;
-    border-radius: 3px;
-    color: rgba(176, 173, 173, 0.70);
+    color: rgb(215, 215, 215);
     display: inline;
     margin-left: 25px;
     margin-right: auto;
-    margin-top: 15px;
+    margin-top: 6px;
 }
 
 /*Gives the Error message in Recovery Style*/
@@ -244,11 +233,7 @@ body, html, form {
 /*Gives the RecoveryPassMenu style*/
 
 .RecoverPass .RecoverPassMenu {
-    background-color: rgba(172, 172, 172, 0.25);
-    border: solid;
-    border-color: rgba(176, 173, 173, 0.60);
-    border-radius: 7px;
-    border-width: 2px;
+    background-color: rgba(18, 18, 18, 0.40);
     height: 230px;
     margin-left: auto;
     margin-right: auto;
@@ -259,10 +244,9 @@ body, html, form {
 /*Gives the RecoveryPass Button Style*/
 
 .RecoverPass .button {
-    background-color: rgba(43, 43, 43, 0.50);
+    background-color: rgba(18, 18, 18, 0.60);
     border: none;
-    border-radius: 3px;
-    color: rgba(176, 173, 173, 0.70);
+    color: rgb(215, 215, 215);
     display: inline;
     margin-left: 25px;
     margin-right: auto;
@@ -577,7 +561,6 @@ body, html, form {
     height:103px;
 }
 
-
 .chart {
   position: relative;
   display: inline-block;
@@ -588,16 +571,19 @@ body, html, form {
   font-size:20px;
   margin-top:20px; 
 }
+
 .chart canvas {
   position: absolute;
   top: 0;
   left: 0;
 }
+
 .percent {
   display: inline-block;
   line-height: 140px;
   z-index: 2;
 }
+
 .percent:after {
   content: '%';
   margin-left: 0.1em;

@@ -10,6 +10,7 @@ public partial class Login : System.Web.UI.Page
 
         if ((Session["Remember"] != null) && (Convert.ToBoolean(Session["Remember"]) == true))
         {
+            Session["Check"] = true;
             Response.Redirect("Dashboard.aspx");
         }
 
