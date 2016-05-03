@@ -31,16 +31,24 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Dashboard.aspx"></a><% //TODO: Place a Weird folder image here%>
+                    <a href="Dashboard.aspx">
+                        <img id="Logs" src="Image/Logs.png" />
+                    </a>
                 </li>
                 <li>
-                    <a href="Dashboard.aspx"></a><% //TODO: Place a Calander image here%>
+                    <a href="Dashboard.aspx">
+                        <img id="Calender" src="Image/Calender.png" />
+                    </a>
                 </li>
                 <li>
-                    <a href="Dashboard.aspx"></a><% //TODO: Place a Folder image here%>
+                    <a href="Dashboard.aspx">
+                        <img id="Folder1" src="Image/folder.png" />
+                    </a>
                 </li>
                 <li>
-                    <a href="Dashboard.aspx"></a><% //TODO: Place a Folder image here%>
+                    <a href="Dashboard.aspx">
+                        <img id="Folder2" src="Image/folder.png" />
+                    </a>
                 </li>
             </ul>
         </div>
