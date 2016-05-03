@@ -6,7 +6,7 @@ body, html, form {
 /*Background*/
 
 .Login, .Register, .Recovery, .RecoverPass {
-    background: url(http://i.imgur.com/S2VMKHh.jpg) no-repeat 0 0 scroll;
+    background: url(https://wallpaperscraft.com/image/background_faded_stains_light_47125_602x339.jpg) no-repeat 0 0 scroll;
     background-size: cover;
     height: auto;
     left: 0;
@@ -19,7 +19,7 @@ body, html, form {
 }
 
 .Dashboard {
-    background: url(http://e2ua.com/data/wallpapers/139/WDF_1807346.jpg) no-repeat 0 0 scroll;
+    background: url(https://wallpaperscraft.com/image/background_faded_stains_light_47125_602x339.jpg) no-repeat 0 0 scroll;
     background-size: cover;
     height: auto;
     left: 0;
@@ -291,7 +291,7 @@ body, html, form {
 
 .Dashboard .Sidebar {
         background-color: rgba(18, 18, 18, 0.80);
-        color: rgb(255, 255, 255);
+        color: rgb(215, 215, 215);
         float: left;
         height: 979px;
         margin: 0;
@@ -316,15 +316,15 @@ body, html, form {
 
 .Dashboard hr {
         border-bottom-width: 0px;
-        color: rgba(135, 135, 135, 0.60);
+        color: rgb(205, 205, 205);
         margin: 0px;
         padding: 0px;
     }
 
 .Dashboard .TotalBotsSidebar {
-        color: rgb(173, 173, 173);
+        color: rgb(215, 215, 215);
         float: left;
-        width: 11.13%;
+        width: 11.24%;
     }
 
 .Dashboard .AmountTotal {
@@ -352,38 +352,160 @@ body, html, form {
             margin-left: 10px;
         }
 
+.Dashboard .TitleBar{
+    margin-top:11.5px;
+    display:inline;
+    float:left;
+    width:86.11%;
+    color: rgb(202, 202, 202);
+    margin-bottom:10px;
+}
+
+.Dashboard .Title{
+    margin-right:0px;
+    display:inline;
+}
+
+.Dashboard .Title h1{
+    display:inline;
+    font-family:Arial;
+    font-size:16px;
+    margin-left:18px;
+    margin-bottom:0px;
+    font-weight:100;
+}
+
+.Dashboard .Tabs{
+    display:inline;
+    font-size:12.6px;
+}
+
+.Dashboard .Tabs ul{
+    display:inline;
+}
+
+.Dashboard .Tabs li{
+    display:inline;
+    float:right;
+    margin-right:11px;
+}
+
+.Dashboard .Tabs a{
+    text-decoration:none;
+    color: rgb(202, 202, 202);
+}
+
+.Dashboard .Tabs .right{
+    margin-right:15.5px;
+}
+
+.Dashboard .FirstLine {
+    margin-bottom:20.5px;
+}
+
 .Dashboard .Summary {
         display: inline;
         height: 200px;
         margin-top: 0px;
+        font-size:12px;
     }
-
-.Dashboard .Hr {
-        display: inline;
-        height: 200px;
-        margin-top: 50px;
-    }
-
-.Dashboard .Hr .top {
-            margin-top: 50px;
-        }
 
 .Dashboard .Summary div {
         background-color: rgba(18, 18, 18, 0.40);
         display: inline;
         float: left;
-        height: 100px;
+        height: 75px;
         margin-left: 17px;
+        color: rgb(215, 215, 215);
+        padding-top:11.5px;
+        padding-left:11.5px;
     }
 
 .Dashboard .Summary .ConnectionsToday, .ConnectionsWeek, .ConnectionsMonth {
-        width: 13.22%;
+        width: 12.6%;
     }
 
 .Dashboard .Summary .OnnlineNow {
-        width: 20.3%;
+        width: 19.7%;
     }
 
 .Dashboard .Summary .ConnectionsTotal {
-        width: 21%;
+        width: 20.4%;
     }
+
+.Dashboard .Summary .Number{
+    font-size:39px;
+}
+
+.Dashboard .SecondLine{
+    margin-top:125px;
+}
+
+.Dashboard .Charts{
+    display:inline;
+    color: rgb(215, 215, 215);
+    font-size:12.8px;
+}
+
+.Dashboard .Charts .CountryMap{
+    margin-left:17px;
+    margin-top:17px;
+    width:41.4%;
+    height:200px;
+    display:inline;
+    float:left;
+}
+
+.Dashboard .Charts .CountryMap .CountryMapName{
+    background-color: rgba(18, 18, 18, 0.60);
+    padding-top:7px;
+    padding-left:11.5px;
+    height:22px;
+}
+
+.Dashboard .Charts .CountryMap .CountryMapChart{
+    background-color: rgba(18, 18, 18, 0.40);
+    height:483px;
+}
+
+.Dashboard .Charts .CountryChart{
+    margin-left:17px;
+    margin-top:17px;
+    width:20.3%;
+    height:200px;
+    display:inline;
+    float:left;
+}
+
+.Dashboard .Charts .CountryChart .CountryChartName{
+    background-color: rgba(18, 18, 18, 0.60);
+    padding-top:7px;
+    padding-left:11.5px;
+    height:22px;
+}
+
+.Dashboard .Charts .CountryChart .CountryChartGraph{
+    background-color: rgba(18, 18, 18, 0.40);
+    height:483px;
+}
+
+.Dashboard .Charts .OSChart{
+    margin-left:17.8px;
+    margin-top:17px;
+    width:21%;
+    height:200px;
+    display:inline;
+    float:left;
+}
+
+.Dashboard .Charts .OSChart .OSChartName{
+    background-color: rgba(18, 18, 18, 0.60);
+    padding-top:7px;
+    padding-left:11.5px;
+    height:22px;
+}
+
+.Dashboard .Charts .OSChart .OSChartGraph{
+    background-color: rgba(18, 18, 18, 0.40);
+    height:483px;
+}
