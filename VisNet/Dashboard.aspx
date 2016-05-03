@@ -7,11 +7,22 @@
 <head runat="server">
     <title>VisNet Dashboard</title>
     <link href="CSS/menu.css" rel="stylesheet" />
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="JS/jquery.easypiechart.min.js"></script>
+    <script>
+        $(function() {
+            var $chart = $('.chart');
+            $chart.easyPieChart({
+                onStep: function(from, to, percent) {
+                $(this.el).find('.percent').text(Math.round(percent));
+                }
+            });
+        });
+    </script>
 </head>
 
 <body class="Dashboard">
     <form id="form1" runat="server">
-
         <div class="Sidebar">
             <ul>
                 <li>
@@ -43,18 +54,35 @@
                 </ul>
             </div>
 
-
             <div class="AmountGraphs">
                 <ul>
                     <li>Online Now</li>
-                    <li></li>
-                    <li></li>
+                    <li>
+                        <span class="chart" <asp:Literal ID="onlineNowPrec" runat="server"></asp:Literal>>
+                         <span class="percent"></span>
+	                    </span>
+                    </li>
+
                     <li>Connections Today</li>
-                    <li><% //TODO: Cricle graph with % amount of bots online today %></li>
+                    <li>
+                        <span class="chart" <asp:Literal ID="connTodayPrec" runat="server"></asp:Literal>>
+		                    <span class="percent"></span>
+	                    </span>
+                    </li>
+
                     <li>Connections This Week</li>
-                    <li><% //TODO: Cricle graph with % amount of bots online this Week %></li>
+                    <li>
+                        <span class="chart" <asp:Literal ID="connWeekPrec" runat="server"></asp:Literal>>
+		                    <span class="percent"></span>
+	                    </span>
+                    </li>
+
                     <li>Connections This Month</li>
-                    <li><% //TODO: Cricle graph with % amount of bots online this Month %></li>
+                    <li>
+                        <span class="chart" <asp:Literal ID="connMonthPrec" runat="server"></asp:Literal>>
+		                    <span class="percent"></span>
+	                    </span>
+                    </li>
                 </ul>
             </div>
         </div>
