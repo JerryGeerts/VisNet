@@ -19,6 +19,72 @@
             });
         });
     </script>
+
+
+    <link href="CSS/jquery-jvectormap.css" rel="stylesheet" />
+    <script src="JS/abstract-canvas-element.js"></script>
+    <script src="JS/abstract-element.js"></script>
+    <script src="JS/abstract-shape-element.js"></script>
+    <script src="JS/color-scale.js"></script>
+    <script src="JS/data-series.js"></script>
+    <script src="JS/jquery-1.8.2.js"></script>
+    <script src="JS/jquery-jvectormap-1.2.2.min.js"></script>
+    <script src="JS/jquery-mousewheel.js"></script>
+    <script src="JS/jquery.easypiechart.min.js"></script>
+    <script src="JS/region.js"></script>
+    <script src="JS/simple-scale.js"></script>
+    <script src="JS/svg-canvas-element.js"></script>
+    <script src="JS/svg-circle-element.js"></script>
+    <script src="JS/svg-element.js"></script>
+    <script src="JS/svg-group-element.js"></script>
+    <script src="JS/svg-image-element.js"></script>
+    <script src="JS/svg-path-element.js"></script>
+    <script src="JS/svg-shape-element.js"></script>
+    <script src="JS/svg-text-element.js"></script>
+    <script src="JS/vector-canvas.js"></script>
+    <script src="JS/vml-canvas-element.js"></script>
+    <script src="JS/vml-circle-element.js"></script>
+    <script src="JS/vml-element.js"></script>
+    <script src="JS/vml-group-element.js"></script>
+    <script src="JS/vml-image-element.js"></script>
+    <script src="JS/vml-path-element.js"></script>
+    <script src="JS/vml-shape-element.js"></script>
+    <script src="JS/legend.js"></script>
+    <script src="JS/map-object.js"></script>
+    <script src="JS/map.js"></script>
+    <script src="JS/marker.js"></script>
+    <script src="JS/multimap.js"></script>
+    <script src="JS/numeric-scale.js"></script>
+    <script src="JS/ordinal-scale.js"></script>
+    <script src="JS/proj.js"></script>
+    <script src="JS/jquery-jvectormap-world-mill-en.js"></script>
+
+    <script>
+    jQuery.noConflict();
+    jQuery(function(){
+      var $ = jQuery;
+
+      $('#map1').vectorMap({
+        map: 'world_mill_en',
+        series: {           
+          regions: [{
+              scale: ['#EAE575', '#23312B'],
+            normalizeFunction: 'polynomial',
+            values: {
+                "RU": 1,
+                "NL": 1,
+                "DE": 1,
+            }
+          },{
+            scale:[1,100]
+          }]
+        },
+        onRegionTipShow: function (e, el, code) {
+        el.html(el.html() + ' (GDP)');
+        }
+      });
+    })
+  </script>
 </head>
 
 <body class="Dashboard">
@@ -164,7 +230,7 @@
                     </ul>
                 </div>
                 <div class="CountryMapChart">
-                    <img src="http://i.imgur.com/4APOBWM.png" />
+                      <div id="map1" style="width: 795px; height: 440px"></div>
                 </div>
             </div>
 

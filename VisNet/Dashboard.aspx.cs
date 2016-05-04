@@ -63,6 +63,12 @@ public partial class Home : System.Web.UI.Page
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
 
             }
+            using (SqlCommand cmd = new SqlCommand("", conn))
+            {
+
+            }
+
         }
+
     }
 }
