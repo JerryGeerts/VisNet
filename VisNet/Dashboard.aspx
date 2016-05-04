@@ -164,7 +164,7 @@
                     </ul>
                 </div>
                 <div class="CountryMapChart">
-                    <img src="http://i.imgur.com/p2Yo9Cy.png" />
+                    <img src="http://i.imgur.com/4APOBWM.png" />
                 </div>
             </div>
 
