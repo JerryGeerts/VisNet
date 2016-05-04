@@ -434,6 +434,11 @@ body, html, form {
     float:left;
 }
 
+.Dashboard .Charts .CountryMap img{
+    width:800px;
+    height:650px;
+}
+
 .Dashboard .Charts .CountryMap .CountryMapName{
     background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;

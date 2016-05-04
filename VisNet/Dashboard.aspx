@@ -164,7 +164,7 @@
                     </ul>
                 </div>
                 <div class="CountryMapChart">
-                <% //TODO: WORLD MAP %>
+                    <img src="http://i.imgur.com/p2Yo9Cy.png" />
                 </div>
             </div>
 
