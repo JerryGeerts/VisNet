@@ -517,6 +517,7 @@ body, html, form {
 .Dashboard .CountGrid .CountryCount .CountryCountGraph{
     background-color: rgba(18, 18, 18, 0.40);
     height:110px;
+
 }
 
 .Dashboard .CountGrid .OSCount{
@@ -564,6 +565,47 @@ body, html, form {
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph{
     background-color: rgba(18, 18, 18, 0.40);
     height:103px;
+
+}
+
+.Dashboard .CountGrid .CountryCount .CountryCountGraph table, .Dashboard .CountGrid .OSCount .OSCountGraph table{
+    width:775px;
+    margin-left:10px;
+    background-color: rgba(18, 18, 18, 0.60);
+    
+}
+
+.Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph table{
+    width:1605px;
+    margin-left:10px;
+    background-color: rgba(18, 18, 18, 0.60);
+}
+
+.Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph tr {
+    height:26px;
+    font-weight:100;
+}
+.Dashboard .CountGrid .CountryCount .CountryCountGraph tr, .Dashboard .CountGrid .OSCount .OSCountGraph tr{
+    height:29px;
+    font-weight:100;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+.Dashboard .CountGrid .Grid{
+    margin-top: 10px;
+    display:inline-block;
+    overflow-y: scroll;
+    height:90px;
+}
+
+.Dashboard .OnlineNowGrid .OnlineNow .Grid{
+    margin-top: 10px;
+    display:inline-block;
+    overflow-y: scroll;
+    height:80px;
 }
 
 .chart {
@@ -593,4 +635,7 @@ body, html, form {
   content: '%';
   margin-left: 0.1em;
   font-size: 20px;
+}
+.Dashboard table{
+    border-bottom:rgba(255, 255, 255, 0.06);
 }

