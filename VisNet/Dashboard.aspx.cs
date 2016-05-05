@@ -78,7 +78,6 @@ public partial class Home : System.Web.UI.Page
             string[] land = new string[amountOfCountrys];
             int[] landAantal = new int[amountOfCountrys];
 
-
             for (int i = 1; i < amountOfCountrys; i++)
             { 
                 using (SqlCommand cmd = new SqlCommand("select Country from(select distinct Country, DENSE_RANK() over (order by country) as rownum from bots) as tbl where tbl.rownum = " + i +"", conn))

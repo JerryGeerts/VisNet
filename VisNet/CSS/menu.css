@@ -336,7 +336,7 @@ body, html, form {
     display:inline;
     float:left;
     width:86.11%;
-    color: rgb(202, 202, 202);
+    color:rgb(47, 79, 80);
     margin-bottom:10px;
 }
 
@@ -371,7 +371,7 @@ body, html, form {
 
 .Dashboard .Tabs a{
     text-decoration:none;
-    color: rgb(202, 202, 202);
+    color:rgb(47, 79, 80);
 }
 
 .Dashboard .Tabs .right{
