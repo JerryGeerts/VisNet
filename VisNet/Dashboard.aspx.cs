@@ -4,7 +4,8 @@ using System.Data;
 
 public partial class Home : System.Web.UI.Page
 {
-    public string test;
+    public string kleurSyntax;
+    public string procentSyntax;
     public void Page_Load(object sender, EventArgs e)
     {
         if ((Session["Check"] == null) || (Convert.ToBoolean(Session["Check"]) == false))
@@ -21,14 +22,13 @@ public partial class Home : System.Web.UI.Page
             int connMonth;
             int connTotal;
 
-            int connTodayPre;
-            int connWeekPre;
-            int connMonthPre;
-            int connNowPre;
+            double connTodayPre;
+            double connWeekPre;
+            double connMonthPre;
+            double connNowPre;
 
+            double procent = 0;
             int amountOfCountrys;
-            int ArraySize;
-
 
             using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots;", conn))
             {
@@ -41,7 +41,7 @@ public partial class Home : System.Web.UI.Page
             {
                 onnlineNow = (int)cmd.ExecuteScalar();
                 lblOnnlineNow.Text = onnlineNow.ToString();
-                connNowPre = (int)Math.Round((double)(100 * onnlineNow) / connTotal);
+                connNowPre = Math.Round((double)(100 * onnlineNow) / connTotal, 1);
                 onlineNowPrec.Text = "data-percent=\"" + connNowPre + "\"";
             }
 
@@ -49,7 +49,7 @@ public partial class Home : System.Web.UI.Page
             {
                 connToday = (int)cmd.ExecuteScalar();
                 lblConnectionsToday.Text = connToday.ToString();
-                connTodayPre = (int)Math.Round((double)(100 * connToday) / connTotal);
+                connTodayPre = Math.Round((double)(100 * connToday) / connTotal, 1);
                 connTodayPrec.Text = "data-percent=\"" + connTodayPre + "\"";
             }
 
@@ -57,7 +57,7 @@ public partial class Home : System.Web.UI.Page
             {
                 connWeek = (int)cmd.ExecuteScalar();
                 lblConnectionsWeek.Text = connWeek.ToString();
-                connWeekPre = (int)Math.Round((double)(100 * connWeek) / connTotal);
+                connWeekPre = Math.Round((double)(100 * connWeek) / connTotal , 1);
                 connWeekPrec.Text = "data-percent=\"" + connWeekPre + "\"";
             }
 
@@ -65,7 +65,7 @@ public partial class Home : System.Web.UI.Page
             {
                 connMonth = (int)cmd.ExecuteScalar();
                 lblConnectionsMonth.Text = connMonth.ToString();
-                connMonthPre = (int)Math.Round((double)(100 * connMonth) / connTotal);
+                connMonthPre = Math.Round((double)(100 * connMonth) / connTotal , 1);
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
 
             }
@@ -90,7 +90,10 @@ public partial class Home : System.Web.UI.Page
                     landAantal[i] = (int)cmd.ExecuteScalar();
                 }
 
-                test += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
+                procent = Math.Round((double)(100 * landAantal[i]) / connTotal , 1);
+
+                kleurSyntax += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
+                procentSyntax += "\"" + land[i] + "\" " + ":" + procent + ", ";
             }
         }
     }

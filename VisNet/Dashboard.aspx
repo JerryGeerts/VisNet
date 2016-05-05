@@ -27,7 +27,7 @@
     jQuery.noConflict();
     jQuery(function(){
         var $ = jQuery;
-        
+        var proc = {<%=procentSyntax%>}
         $('#map1').vectorMap({
         backgroundColor: "",
         map: 'world_mill_en',
@@ -36,13 +36,18 @@
             scale: ['#ADC093', '#23312B'],
             normalizeFunction: 'polynomial',
             values: {
-                <%=test%>
+                <%=kleurSyntax%>
             }
           }]
         },
-          onRegionTipShow: function (e, el, code) {
-              el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
-          }
+            onRegionTipShow: function (e, el, code) {
+                if (proc[code] === undefined) {
+                    el.html(el.html() + ' ( 0 % )');
+                }
+                else {
+                    el.html(el.html() + ' ( ' + proc[code] + ' % )');
+                }
+            }
       });
     })
   </script>
