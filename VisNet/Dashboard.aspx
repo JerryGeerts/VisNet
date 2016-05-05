@@ -62,18 +62,17 @@
     <script>
     jQuery.noConflict();
     jQuery(function(){
-      var $ = jQuery;
+        var $ = jQuery;
+        
 
       $('#map1').vectorMap({
         map: 'world_mill_en',
         series: {           
           regions: [{
-              scale: ['#EAE575', '#23312B'],
+              scale: ['#ADC093', '#23312B'],
             normalizeFunction: 'polynomial',
             values: {
-                "RU": 1,
-                "NL": 1,
-                "DE": 1,
+                <%=test%>
             }
           },{
             scale:[1,100]

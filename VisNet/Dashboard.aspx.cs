@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Data.SqlClient;
+using System.Data;
 
 public partial class Home : System.Web.UI.Page
 {
-    protected void Page_Load(object sender, EventArgs e)
+    public string test;
+    public void Page_Load(object sender, EventArgs e)
     {
         if ((Session["Check"] == null) || (Convert.ToBoolean(Session["Check"]) == false))
         {
@@ -18,11 +20,15 @@ public partial class Home : System.Web.UI.Page
             int connWeek;
             int connMonth;
             int connTotal;
-            
+
             int connTodayPre;
             int connWeekPre;
             int connMonthPre;
             int connNowPre;
+
+            int amountOfCountrys;
+            int ArraySize;
+
 
             using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots;", conn))
             {
@@ -63,12 +69,30 @@ public partial class Home : System.Web.UI.Page
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
 
             }
-            using (SqlCommand cmd = new SqlCommand("", conn))
-            {
 
+            using (SqlCommand cmd = new SqlCommand("select count(distinct Country) from bots", conn))
+            {
+                amountOfCountrys = (int)cmd.ExecuteScalar() + 1;
             }
 
-        }
+            string[] land = new string[amountOfCountrys];
+            int[] landAantal = new int[amountOfCountrys];
 
+
+            for (int i = 1; i < amountOfCountrys; i++)
+            { 
+                using (SqlCommand cmd = new SqlCommand("select Country from(select distinct Country, DENSE_RANK() over (order by country) as rownum from bots) as tbl where tbl.rownum = " + i +"", conn))
+                {
+                    land[i] = (string)cmd.ExecuteScalar();
+                }
+
+                using (SqlCommand cmd = new SqlCommand("select count(*) from bots where Country = '" + land[i] + "'", conn))
+                {
+                    landAantal[i] = (int)cmd.ExecuteScalar();
+                }
+
+                test += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
+            }
+        }
     }
 }
