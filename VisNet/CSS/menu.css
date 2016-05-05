@@ -329,14 +329,14 @@ body, html, form {
 .Dashboard .AmountGraphs ul {
             font-size: 14px;
             margin-left: 10px;
-        }
+}
 
 .Dashboard .TitleBar{
     margin-top:11.5px;
     display:inline;
     float:left;
     width:86.11%;
-    color:rgb(47, 79, 80);
+    color: rgba(18, 18, 18, 0.70);
     margin-bottom:10px;
 }
 
@@ -371,7 +371,7 @@ body, html, form {
 
 .Dashboard .Tabs a{
     text-decoration:none;
-    color:rgb(47, 79, 80);
+    color: rgba(18, 18, 18, 0.70);
 }
 
 .Dashboard .Tabs .right{
