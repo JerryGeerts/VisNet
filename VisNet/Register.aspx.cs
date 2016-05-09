@@ -107,8 +107,8 @@ public partial class Register : System.Web.UI.Page
             string body = "Hello " + txtUsername.Text.Trim() + ",";
             body += "<br /><br />Please click the following link to activate your account";
             body += "<br /><a href = '" +
-                    Request.Url.AbsoluteUri.Replace("Register.aspx", "Login.aspx?ActivationCode=" + emailActivationCode) +
-                    "'> Click here to activate your account.</a>";
+            Request.Url.AbsoluteUri.Replace("Register.aspx", "Login.aspx?ActivationCode=" + emailActivationCode) +
+            "'> Click here to activate your account.</a>";
             body += "<br /><br />Thanks";
             mm.Body = body;
             mm.IsBodyHtml = true;
