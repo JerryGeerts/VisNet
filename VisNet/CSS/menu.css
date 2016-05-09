@@ -571,14 +571,14 @@ body, html, form {
 .Dashboard .CountGrid .CountryCount .CountryCountGraph table, .Dashboard .CountGrid .OSCount .OSCountGraph table{
     width:775px;
     margin-left:10px;
-    background-color: rgba(18, 18, 18, 0.60);
+    background-color: rgba(18, 18, 18, 0.40);
     
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph table{
     width:1605px;
     margin-left:10px;
-    background-color: rgba(18, 18, 18, 0.60);
+    background-color: rgba(18, 18, 18, 0.40);
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph tr {
