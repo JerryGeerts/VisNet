@@ -19,46 +19,6 @@
             });
         });
     </script>
-    <link href="CSS/jquery-jvectormap-2.0.3.css" rel="stylesheet" />
-    <script src="JS/jquery-1.8.2.js"></script>
-    <script src="JS/jquery-jvectormap-2.0.3.min.js"></script>
-    <script src="JS/jquery-jvectormap-world-mill-en.js"></script>
-    <script>
-    jQuery.noConflict();
-    jQuery(function(){
-        var $ = jQuery;
-        var proc = {<%=procentSyntax%>}
-        $('#map1').vectorMap({
-        backgroundColor: "",
-        map: 'world_mill_en',
-        series: {           
-          regions: [{
-            scale: ['#ADC093', '#23312B'],
-            normalizeFunction: 'polynomial',
-            values: {
-                <%=kleurSyntax%>
-            }
-          }]
-        },
-            onRegionTipShow: function (e, el, code) {
-                if (proc[code] === undefined) {
-                    el.html(el.html() + ' ( 0 % )');
-                }
-                else {
-                    el.html(el.html() + ' ( ' + proc[code] + ' % )');
-                }
-            }
-      });
-    })
-  </script>
-    <style type="text/css">
-        .auto-style1 {
-            width: 100%;
-        }
-        .auto-style2 {
-            width: 163px;
-        }
-    </style>
 </head>
 
 <body class="Dashboard">
@@ -204,13 +164,14 @@
             <div class="TasksGrid">
                 <div class="Grid">
                     <br />
+                    <br />
                     <table class="auto-style1">
                         <tr>
                             <td class="auto-style2">
                     <asp:Label ID="lblDropdown" runat="server" Text="Task"></asp:Label>
                             </td>
                             <td>
-                    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid">
+                    <asp:DropDownList ID="ddTask" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid" Height="35px" Width="260px" SelectedIndexChanged="ddTask_SelectedIndexChanged">
                         <asp:ListItem Value="0" disabled selected hidden >Nothing selected</asp:ListItem>
                         <asp:ListItem Value="clipboard">Clipboard Manager</asp:ListItem>
                         <asp:ListItem Value="http">HTTP Flood</asp:ListItem>
@@ -236,7 +197,7 @@
                     <asp:Label ID="lblFilter" runat="server" Text="Filter"></asp:Label>
                             </td>
                             <td>
-                    <asp:TextBox ID="txtFilter" runat="server" placeholder="Example: US, 127.0.0.1, BFEBFBFF000306C3"></asp:TextBox>
+                    <asp:TextBox ID="txtFilter" runat="server" placeholder="Example: US, 127.0.0.1, BFEBFBFF000306C3" Width="530px" Height="30px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
@@ -244,21 +205,23 @@
                     <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
                             </td>
                             <td>
-                    <asp:TextBox ID="txtAmount" runat="server" placeholder="Amount of bots to run Task"></asp:TextBox>
+                    <asp:TextBox ID="txtAmount" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td class="auto-style2">&nbsp;</td>
                             <td>
-                    <asp:Button ID="Button1" runat="server" Text="Button" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="SUBMIT" />
                             </td>
                         </tr>
                     </table>
                     <br />
                     <br />
                     <br />
-                   <asp:GridView cssClass="grdTask" ID="grdTask" runat="server">
-                   </asp:GridView>
+                    <div class="Grid">
+                        <asp:GridView cssClass="grdTask" ID="grdTask" runat="server" onrowdatabound="grdTask_RowDataBound">
+                        </asp:GridView>
+                    </div>
                 </div>
             </div>
         </div>

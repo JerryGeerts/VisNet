@@ -6,8 +6,6 @@ using System.Web.UI.WebControls;
 
 public partial class Tasks : System.Web.UI.Page
 {
-    public string kleurSyntax;
-    public string procentSyntax;
     protected void Page_Load(object sender, EventArgs e)
     {
         using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
@@ -23,9 +21,6 @@ public partial class Tasks : System.Web.UI.Page
             double connWeekPre;
             double connMonthPre;
             double connNowPre;
-
-            double procent = 0;
-            int amountOfCountrys;
 
             using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots;", conn))
             {
@@ -67,33 +62,35 @@ public partial class Tasks : System.Web.UI.Page
 
             }
 
-            using (SqlCommand cmd = new SqlCommand("select count(distinct Country) from bots", conn))
+            using (SqlCommand cmd = new SqlCommand("select TaskID, Type, Parameter1, Parameter2, Parameter3, Parameter4, Max, Ran, Filter, Status, Options from Tasks", conn))
             {
-                amountOfCountrys = (int)cmd.ExecuteScalar() + 1;
+                DataSet ds = new DataSet();
+                SqlDataReader reader = cmd.ExecuteReader();
+                grdTask.DataSource = reader;
+                grdTask.DataBind();
+                reader.Close();
             }
-
-            string[] land = new string[amountOfCountrys];
-            int[] landAantal = new int[amountOfCountrys];
-
-            for (int i = 1; i < amountOfCountrys; i++)
-            {
-                using (SqlCommand cmd = new SqlCommand("select Country from(select distinct Country, DENSE_RANK() over (order by country) as rownum from bots) as tbl where tbl.rownum = @i", conn))
-                {
-                    cmd.Parameters.AddWithValue("i", i);
-                    land[i] = (string)cmd.ExecuteScalar();
-                }
-
-                using (SqlCommand cmd = new SqlCommand("select count(*) from bots where Country = @land", conn))
-                {
-                    cmd.Parameters.AddWithValue("land", land[i]);
-                    landAantal[i] = (int)cmd.ExecuteScalar();
-                }
-
-                procent = Math.Round((double)(100 * landAantal[i]) / connTotal, 1);
-
-                kleurSyntax += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
-                procentSyntax += "\"" + land[i] + "\" " + ":" + procent + ", ";
-            }
+        }
+    }
+    protected void grdTask_RowDataBound(object sender, GridViewRowEventArgs e)
+    {
+        if (e.Row.RowType == DataControlRowType.Header)
+        {
+            e.Row.Cells[0].Text = "NO.";
+            e.Row.Cells[1].Text = "TYPE";
+            e.Row.Cells[2].Text = "PARAMETER 1";
+            e.Row.Cells[3].Text = "PARAMETER 2";
+            e.Row.Cells[4].Text = "PARAMETER 3";
+            e.Row.Cells[5].Text = "PARAMETER 4";
+            e.Row.Cells[6].Text = "MAX AMOUNT";
+            e.Row.Cells[7].Text = "RUNNING AMOUNT";
+            e.Row.Cells[8].Text = "FILTERS";
+            e.Row.Cells[9].Text = "STATUS";
+            e.Row.Cells[10].Text = "OPTIONS";
+        }
+        foreach (TableCell tc in e.Row.Cells)
+        {
+            tc.Attributes["style"] = "border-right:none; border-left: none; border-top: none;text-align:left;";
         }
     }
 }

@@ -530,8 +530,8 @@ body, html, form {
 }
 
 .Dashboard .Tasks #lblDropdown,#lblFilter,#lblAmount{
-float:right;
-
+    float:right;
+    margin-right:15px;
 }
 
 .Dashboard .Tasks .TaskName{
@@ -543,7 +543,34 @@ float:right;
 
 .Dashboard .Tasks .TasksGrid{
     background-color: rgba(18, 18, 18, 0.40);
-    height:765px;
+    height:740px;
+}
+
+.Dashboard .Tasks #ddTask{
+    background-color:rgba(0, 0, 0, 0.00);
+    color: rgb(215, 215, 215);
+    border-color:rgb(215, 215, 215);
+    font-size:15px;
+    padding-left: 10px;
+}
+
+.Dashboard .Tasks #txtFilter,#txtAmount{
+    background-color:rgba(0, 0, 0, 0.00);
+    color: rgb(215, 215, 215);
+    border-color:rgb(215, 215, 215);
+    border: 1px solid;
+    margin-top:5px;
+    font-size:15px;
+    padding-left: 10px;
+}
+
+.Dashboard .Tasks #btnSubmit{
+    height:35px;
+    width:80px;
+    background-color: rgba(18, 18, 18, 0.60);
+    color: rgb(215, 215, 215);
+    border:none;
+    margin-top:20px;
 }
 
 .Dashboard .CountGrid .OSCount{
@@ -605,6 +632,18 @@ float:right;
     width:1605px;
     margin-left:10px;
     background-color: rgba(18, 18, 18, 0.60);
+}
+
+.Dashboard .Tasks .grdTask{
+    width:1565px;
+    margin-left:30px;
+    background-color: rgba(18, 18, 18, 0.60);
+    font-size:12.8px;
+}
+
+.Dashboard .Tasks .grdTask tr{
+    height:30px;
+    font-weight:100;
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph tr {
