@@ -532,6 +532,12 @@ body, html, form {
 .Dashboard .Tasks #lblDropdown,#lblFilter,#lblAmount{
     float:right;
     margin-right:15px;
+    margin-left:80px;
+}
+
+.Dashboard .Tasks #lblError{
+    color:rgb(186, 0, 0);
+    margin-left:155px;
 }
 
 .Dashboard .Tasks .TaskName{
@@ -562,6 +568,12 @@ body, html, form {
     margin-top:5px;
     font-size:15px;
     padding-left: 10px;
+}
+
+.Dashboard .Tasks #ddTask option{
+    background-color: rgba(255,255,255,.5);
+    opacity: 0.6;
+    color:grey;
 }
 
 .Dashboard .Tasks #btnSubmit{
@@ -705,4 +717,23 @@ body, html, form {
 }
 .Dashboard table{
     border-bottom:rgba(255, 255, 255, 0.06);
+}
+
+.Dashboard .TasksGrid a{
+    color: rgb(215, 215, 215);
+    text-decoration:none;
+}
+
+.Dashboard .TasksGrid input,select{
+    background-color:rgba(0, 0, 0, 0.00);
+    color: rgb(215, 215, 215);
+    border-color:rgb(215, 215, 215);
+    font-size:15px;
+    border: 1px solid;
+}
+
+.Dashboard .TasksGrid option{
+    background-color: rgba(255,255,255,.5);
+    opacity: 0.6;
+    color:grey;
 }

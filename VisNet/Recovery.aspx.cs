@@ -17,7 +17,7 @@ public partial class Recovery : System.Web.UI.Page
         }
         else
         {
-            using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
+            using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
             {
                 bool email;
                 string active;

@@ -15,7 +15,7 @@ public partial class RecoverPass : System.Web.UI.Page
         string Salt = BCrypt.Net.BCrypt.GenerateSalt();
         string Hash = BCrypt.Net.BCrypt.HashPassword(txtPassword.Text, Salt);
 
-        using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
+        using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
         {
             conn.Open();
 

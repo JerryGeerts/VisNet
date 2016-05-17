@@ -15,7 +15,7 @@ public partial class Home : System.Web.UI.Page
             Response.Redirect("Login.aspx");
         }
 
-        using (SqlConnection conn = new SqlConnection("Data Source=localhost;Initial Catalog=Kennedy;Integrated Security=True"))
+        using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
         {
             conn.Open();
             int onnlineNow;
@@ -32,14 +32,14 @@ public partial class Home : System.Web.UI.Page
             double procent = 0;
             int amountOfCountrys;
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots;", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots;", conn))
             {
                 connTotal = (int)cmd.ExecuteScalar();
                 lblConnectionsTotal.Text = connTotal.ToString();
                 lblTotalBots.Text = connTotal.ToString();
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())));", conn))
             {
                 onnlineNow = (int)cmd.ExecuteScalar();
                 lblOnnlineNow.Text = onnlineNow.ToString();
@@ -47,7 +47,7 @@ public partial class Home : System.Web.UI.Page
                 onlineNowPrec.Text = "data-percent=\"" + connNowPre + "\"";
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -1, GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -1, GETDATE())));", conn))
             {
                 connToday = (int)cmd.ExecuteScalar();
                 lblConnectionsToday.Text = connToday.ToString();
@@ -55,7 +55,7 @@ public partial class Home : System.Web.UI.Page
                 connTodayPrec.Text = "data-percent=\"" + connTodayPre + "\"";
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -7, GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -7, GETDATE())));", conn))
             {
                 connWeek = (int)cmd.ExecuteScalar();
                 lblConnectionsWeek.Text = connWeek.ToString();
@@ -63,7 +63,7 @@ public partial class Home : System.Web.UI.Page
                 connWeekPrec.Text = "data-percent=\"" + connWeekPre + "\"";
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -30, GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(day, -30, GETDATE())));", conn))
             {
                 connMonth = (int)cmd.ExecuteScalar();
                 lblConnectionsMonth.Text = connMonth.ToString();
