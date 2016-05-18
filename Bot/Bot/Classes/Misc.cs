@@ -28,17 +28,17 @@ namespace Bot.Classes
             return exists;
         }
 
-        public static string getDate()
+        public static DateTime getDate()
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
-                string date = "";
+                DateTime date = new DateTime();
                 try
                 {
                     using (SqlCommand cmd = new SqlCommand("SELECT CONVERT(datetime,GETDATE())", conn))
                     {
-                        date = cmd.ExecuteScalar().ToString();
+                        date = Convert.ToDateTime(cmd.ExecuteScalar());
                     }
                 }
                 catch { }
