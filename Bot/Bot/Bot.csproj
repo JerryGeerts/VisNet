@@ -9,11 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Bot</RootNamespace>
     <AssemblyName>Bot</AssemblyName>
-<<<<<<< HEAD
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
-=======
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
->>>>>>> origin/master
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFrameworkProfile />
@@ -104,11 +100,4 @@
     </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>
