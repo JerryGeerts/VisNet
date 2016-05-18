@@ -39,7 +39,7 @@ public partial class Home : System.Web.UI.Page
                 lblTotalBots.Text = connTotal.ToString();
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -6 , GETDATE())));", conn))
             {
                 onnlineNow = (int)cmd.ExecuteScalar();
                 lblOnnlineNow.Text = onnlineNow.ToString();

