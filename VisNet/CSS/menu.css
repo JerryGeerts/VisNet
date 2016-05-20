@@ -6,7 +6,7 @@ body, html, form {
 /*Background*/
 
 .Login, .Register, .Recovery, .RecoverPass {
-    background: url(https://wallpaperscraft.com/image/background_faded_stains_light_47125_602x339.jpg) no-repeat 0 0 scroll;
+    background: url('../Image/background_faded_stains_light_47125_1920x1080.jpg') no-repeat 0 0 scroll;
     background-size: cover;
     height: auto;
     left: 0;
@@ -19,7 +19,7 @@ body, html, form {
 }
 
 .Dashboard {
-    background: url(https://wallpaperscraft.com/image/background_faded_stains_light_47125_602x339.jpg) no-repeat 0 0 scroll;
+    background: url('../Image/background_faded_stains_light_47125_1920x1080.jpg') no-repeat 0 0 scroll;
     background-size: cover;
     height: auto;
     left: 0;
