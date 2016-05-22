@@ -54,13 +54,13 @@ namespace Bot.Classes
                     Console.WriteLine("Clipboard");
                     break;
                 case "http":
-
+                    Console.WriteLine("HTTP");
                     break;
                 case "syn":
-
+                    Console.WriteLine("SYN");
                     break;
                 case "udp":
-
+                    Console.WriteLine("UDP");
                     break;
                 case "download":
 

