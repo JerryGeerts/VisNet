@@ -86,7 +86,7 @@
         </div>
 
         <div class="TotalBotsSidebar">
-            <div class="AmountTotal">
+            <div class="color2 AmountTotal">
                 <ul>
                     <li>TOTAL BOTS:
                         <asp:Label ID="lblTotalBots" runat="server" Font-Names="Arial">0</asp:Label>
@@ -94,7 +94,7 @@
                 </ul>
             </div>
 
-            <div class="AmountGraphs">
+            <div class="color1 AmountGraphs">
                 <ul>
                     <li>Online Now</li>
                     <li>
@@ -155,31 +155,31 @@
         <hr class="FirstLine" />
 
         <div class="Summary">
-            <div class="OnnlineNow">
+            <div class="color1 OnnlineNow">
                 <asp:Label CssClass="Number" ID="lblOnnlineNow" runat="server" Text="0" ></asp:Label>
                 <br />
                 <asp:Label ID="lblOnnlineNowText" runat="server" Text="ONLINE NOW"></asp:Label>
             </div>
 
-            <div class="ConnectionsToday">
+            <div class="color1 ConnectionsToday">
                 <asp:Label CssClass="Number" ID="lblConnectionsToday" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsTodayText" runat="server" Text="CONNECTIONS TODAY"></asp:Label>
             </div>
 
-            <div class="ConnectionsWeek">
+            <div class="color1 ConnectionsWeek">
                 <asp:Label CssClass="Number" ID="lblConnectionsWeek" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsWeekText" runat="server" Text="CONNECTIONS THIS WEEK"></asp:Label>
             </div>
 
-            <div class="ConnectionsMonth">
+            <div class="color1 ConnectionsMonth">
                 <asp:Label CssClass="Number" ID="lblConnectionsMonth" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsMonthText" runat="server" Text="CONNECTIONS THIS MONTH"></asp:Label>
             </div>
 
-            <div class="ConnectionsTotal">
+            <div class="color1 ConnectionsTotal">
                 <asp:Label CssClass="Number" ID="lblConnectionsTotal" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsTotalText" runat="server" Text="TOTAL CONNECTIONS"></asp:Label>
@@ -190,34 +190,34 @@
 
         <div class="Charts">
             <div class="CountryMap">
-                <div class="CountryMapName">
+                <div class="color2 CountryMapName">
                     <ul>
                         <li>COUNTRY MAP</li>
                     </ul>
                 </div>
-                <div class="CountryMapChart">
+                <div class="color1 CountryMapChart">
                       <div id="map1" style="width: 795px; height: 440px"></div>
                 </div>
             </div>
 
             <div class="CountryChart">
-                <div class="CountryChartName">
+                <div class="color2 CountryChartName">
                     <ul>
                         <li>COUNTRY CHART</li>
                     </ul>
                 </div>
-                <div class="CountryChartGraph">
+                <div class="color1 CountryChartGraph">
                     <% //TODO: Pie Chart for Countrys %>
                 </div>
             </div>
 
             <div class="OSChart">
-                <div class="OSChartName">
+                <div class="color2 OSChartName">
                     <ul>
                         <li>OPERATING SYSTEM CHART</li>
                     </ul>
                 </div>
-                <div class="OSChartGraph">
+                <div class="color1 OSChartGraph">
                     <% //TODO: BarGraph with OS's %>
                 </div>
             </div>
@@ -225,28 +225,28 @@
 
         <div class="CountGrid">
             <div class="CountryCount">
-                <div class="CountryCountName">
+                <div class="color2 CountryCountName">
                     <ul>
                         <li>COUNTRY COUNT</li>
                     </ul>
                 </div>
-                <div class="CountryCountGraph">
+                <div class="color1 CountryCountGraph">
                     <div class="Grid">
-                        <asp:GridView ID="grdCountry" runat="server" onrowdatabound="grdCountry_RowDataBound">
+                        <asp:GridView cssClass="color2" ID="grdCountry" runat="server" onrowdatabound="grdCountry_RowDataBound">
                         </asp:GridView>
                     </div>
                 </div>
             </div>
 
             <div class="OSCount">
-                <div class="OSCountName">
+                <div class="color2 OSCountName">
                     <ul>
                         <li>OPERATING SYSTEM COUNT</li>
                     </ul>
                 </div>
-                <div class="OSCountGraph">
+                <div class="color1 OSCountGraph">
                     <div class="Grid">
-                        <asp:GridView cssClass="grdOS" ID="grdOS" runat="server" onrowdatabound="grdOS_RowDataBound">
+                        <asp:GridView cssClass="color2" ID="grdOS" runat="server" onrowdatabound="grdOS_RowDataBound">
                         </asp:GridView>
                     </div>
                 </div>
@@ -255,12 +255,12 @@
 
         <div class="OnlineNowGrid">
             <div class="OnlineNow">
-                <div class="OnlineNowName">
+                <div class="color2 OnlineNowName">
                     <ul>
                         <li>ONLINE NOW</li>
                     </ul>
                 </div>
-                <div class="OnlineNowGraph">
+                <div class="color1 OnlineNowGraph">
                     <div class="Grid">
                         <asp:GridView ID="grdOnline" runat="server" onrowdatabound="grdOnline_RowDataBound">
                         </asp:GridView>

@@ -5,20 +5,7 @@ body, html, form {
 
 /*Background*/
 
-.Login, .Register, .Recovery, .RecoverPass {
-    background: url('../Image/background_faded_stains_light_47125_1920x1080.jpg') no-repeat 0 0 scroll;
-    background-size: cover;
-    height: auto;
-    left: 0;
-    min-height: 768px;
-    min-width: 1024px;
-    overflow: hidden;
-    position: fixed;
-    top: 0;
-    width: 100%;
-}
-
-.Dashboard {
+.Login, .Register, .Recovery, .RecoverPass, .Dashboard{
     background: url('../Image/background_faded_stains_light_47125_1920x1080.jpg') no-repeat 0 0 scroll;
     background-size: cover;
     height: auto;
@@ -38,7 +25,15 @@ body, html, form {
     margin-top: 300px;
 }
 
+/*Global CSS*/
 
+.color1{
+    background-color: rgba(18, 18, 18, 0.4);
+}
+
+.color2{
+    background-color: rgba(18, 18, 18, 0.60);
+}
 
 /*LOGIN CSS*/
 
@@ -47,7 +42,6 @@ body, html, form {
 /*Gives the LoginMenu all its Style*/
 
 .LoginMenu {
-    background-color: rgba(18, 18, 18, 0.40);
     border-width: 2px;
     height: 400px;
     margin-left: auto;
@@ -59,7 +53,6 @@ body, html, form {
 /*Gives the LoginText all its Style*/
 
 .LoginText {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     margin-left: 25px;
@@ -108,7 +101,6 @@ body, html, form {
 /*Gives the Login Button Style*/
 
 .Login .button {
-    background-color: rgba(18, 18, 18, 0.60);
     color: rgb(215, 215, 215);
     display: inline;
     margin-left: 25px;
@@ -132,7 +124,7 @@ body, html, form {
 /*Gives the RegisterMenu all its Style*/
 
 .Register .RegisterMenu {
-    background-color: rgba(18, 18, 18, 0.40);
+
     border-width: 2px;
     height: 400px;
     margin-left: auto;
@@ -144,7 +136,6 @@ body, html, form {
 /*Gives the RegisterText all its Style*/
 
 .Register .RegisterText {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     margin-left: 25px;
@@ -156,7 +147,6 @@ body, html, form {
 /*Gives the Register Button Style*/
 
 .Register .button {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     display: inline;
@@ -186,7 +176,6 @@ body, html, form {
 /*Gives the RegisterMenu all its Style*/
 
 .Recovery .RecoveryMenu {
-    background-color: rgba(18, 18, 18, 0.40);
     height: 170px;
     margin-left: auto;
     margin-right: auto;
@@ -197,7 +186,6 @@ body, html, form {
 /*Gives the RecoveryText all its Style*/
 
 .Recovery .RecoveryText {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     margin-left: 25px;
@@ -209,7 +197,6 @@ body, html, form {
 /*Gives the Recovery Button Style*/
 
 .Recovery .button {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     display: inline;
@@ -233,7 +220,6 @@ body, html, form {
 /*Gives the RecoveryPassMenu style*/
 
 .RecoverPass .RecoverPassMenu {
-    background-color: rgba(18, 18, 18, 0.40);
     height: 230px;
     margin-left: auto;
     margin-right: auto;
@@ -244,7 +230,6 @@ body, html, form {
 /*Gives the RecoveryPass Button Style*/
 
 .RecoverPass .button {
-    background-color: rgba(18, 18, 18, 0.60);
     border: none;
     color: rgb(215, 215, 215);
     display: inline;
@@ -307,7 +292,6 @@ body, html, form {
     }
 
 .Dashboard .AmountTotal {
-        background-color: rgba(18, 18, 18, 0.60);
         float: left;
         font-size: 12px;
         font-weight: 500;
@@ -320,7 +304,6 @@ body, html, form {
         }
 
 .Dashboard .AmountGraphs {
-        background-color: rgba(18, 18, 18, 0.40);
         float: left;
         height: 943px;
         width: 100%;
@@ -389,7 +372,6 @@ body, html, form {
     }
 
 .Dashboard .Summary div {
-        background-color: rgba(18, 18, 18, 0.40);
         display: inline;
         float: left;
         height: 75px;
@@ -440,14 +422,12 @@ body, html, form {
 }
 
 .Dashboard .Charts .CountryMap .CountryMapName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .Charts .CountryMap .CountryMapChart{
-    background-color: rgba(18, 18, 18, 0.40);
     height:439px;
 }
 
@@ -461,14 +441,12 @@ body, html, form {
 }
 
 .Dashboard .Charts .CountryChart .CountryChartName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .Charts .CountryChart .CountryChartGraph{
-    background-color: rgba(18, 18, 18, 0.40);
     height:439px;
 }
 
@@ -482,14 +460,12 @@ body, html, form {
 }
 
 .Dashboard .Charts .OSChart .OSChartName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .Charts .OSChart .OSChartGraph{
-    background-color: rgba(18, 18, 18, 0.40);
     height:439px;
 }
 
@@ -508,7 +484,6 @@ body, html, form {
 }
 
 .Dashboard .CountGrid .CountryCount .CountryCountName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
@@ -516,7 +491,6 @@ body, html, form {
 }
 
 .Dashboard .CountGrid .CountryCount .CountryCountGraph{
-    background-color: rgba(18, 18, 18, 0.40);
     height:110px;
 }
 
@@ -541,14 +515,12 @@ body, html, form {
 }
 
 .Dashboard .Tasks .TaskName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .Tasks .TasksGrid{
-    background-color: rgba(18, 18, 18, 0.40);
     height:740px;
 }
 
@@ -579,7 +551,6 @@ body, html, form {
 .Dashboard .Tasks #btnSubmit{
     height:35px;
     width:80px;
-    background-color: rgba(18, 18, 18, 0.60);
     color: rgb(215, 215, 215);
     border:none;
     margin-top:20px;
@@ -594,14 +565,12 @@ body, html, form {
 }
 
 .Dashboard .CountGrid .OSCount .OSCountName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .CountGrid .OSCount .OSCountGraph{
-    background-color: rgba(18, 18, 18, 0.40);
     height:110px;
 }
 
@@ -621,35 +590,29 @@ body, html, form {
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowName{
-    background-color: rgba(18, 18, 18, 0.60);
     padding-top:7px;
     padding-left:11.5px;
     height:22px;
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph{
-    background-color: rgba(18, 18, 18, 0.40);
     height:103px;
 
 }
 
 .Dashboard .CountGrid .CountryCount .CountryCountGraph table, .Dashboard .CountGrid .OSCount .OSCountGraph table{
     width:775px;
-    margin-left:10px;
-    background-color: rgba(18, 18, 18, 0.60);
-    
+    margin-left:10px;    
 }
 
 .Dashboard .OnlineNowGrid .OnlineNow .OnlineNowGraph table{
     width:1605px;
     margin-left:10px;
-    background-color: rgba(18, 18, 18, 0.60);
 }
 
 .Dashboard .Tasks .grdTask{
     width:1565px;
     margin-left:30px;
-    background-color: rgba(18, 18, 18, 0.60);
     font-size:12.8px;
 }
 

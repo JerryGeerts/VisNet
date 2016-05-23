@@ -9,13 +9,13 @@
 </head>
 <body class="Recovery">
 <form id="form1" runat="server">
-    <div class="RecoveryMenu">
-        <asp:TextBox CssClass="RecoveryText" ID="txtEmail" runat="server" Width="300px" Height="35px" Font-Size="Large" Placeholder="Your Email"></asp:TextBox>
+    <div class="color1 RecoveryMenu">
+        <asp:TextBox CssClass="color2 RecoveryText" ID="txtEmail" runat="server" Width="300px" Height="35px" Font-Size="Large" Placeholder="Your Email"></asp:TextBox>
         <br/>
         <div id="lblFalseID" style="margin-left: auto; margin-right: auto; text-align: center; height: 20px">
             <asp:Label ID="lblFalse" runat="server" Font-Names="Arial" Font-Size="Small" ForeColor="#CC0000"></asp:Label>
         </div>
-        <asp:Button CssClass="button" ID="btnRecover" runat="server" OnClick="btnRecover_Click" Text="Recover" Width="320px" Height="40px" Font-Size="Large"/>
+        <asp:Button CssClass="color2 button" ID="btnRecover" runat="server" OnClick="btnRecover_Click" Text="Recover" Width="320px" Height="40px" Font-Size="Large"/>
     </div>
 </form>
 </body>

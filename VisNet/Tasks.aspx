@@ -23,7 +23,7 @@
 
 <body class="Dashboard">
     <form id="form2" runat="server">
-        <div class="Sidebar">
+        <div class="color1 Sidebar">
             <ul>
                 <li>
                     <a href="Dashboard.aspx">
@@ -54,7 +54,7 @@
         </div>
 
         <div class="TotalBotsSidebar">
-            <div class="AmountTotal">
+            <div class="color2 AmountTotal">
                 <ul>
                     <li>TOTAL BOTS:
                         <asp:Label ID="lblTotalBots" runat="server" Font-Names="Arial">0</asp:Label>
@@ -62,7 +62,7 @@
                 </ul>
             </div>
 
-            <div class="AmountGraphs">
+            <div class="color1 AmountGraphs">
                 <ul>
                     <li>Online Now</li>
                     <li>
@@ -123,31 +123,31 @@
         <hr class="FirstLine" />
 
         <div class="Summary">
-            <div class="OnnlineNow">
+            <div class="color1 OnnlineNow">
                 <asp:Label CssClass="Number" ID="lblOnnlineNow" runat="server" Text="0" ></asp:Label>
                 <br />
                 <asp:Label ID="lblOnnlineNowText" runat="server" Text="ONLINE NOW"></asp:Label>
             </div>
 
-            <div class="ConnectionsToday">
+            <div class="color1 ConnectionsToday">
                 <asp:Label CssClass="Number" ID="lblConnectionsToday" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsTodayText" runat="server" Text="CONNECTIONS TODAY"></asp:Label>
             </div>
 
-            <div class="ConnectionsWeek">
+            <div class="color1 ConnectionsWeek">
                 <asp:Label CssClass="Number" ID="lblConnectionsWeek" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsWeekText" runat="server" Text="CONNECTIONS THIS WEEK"></asp:Label>
             </div>
 
-            <div class="ConnectionsMonth">
+            <div class="color1 ConnectionsMonth">
                 <asp:Label CssClass="Number" ID="lblConnectionsMonth" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsMonthText" runat="server" Text="CONNECTIONS THIS MONTH"></asp:Label>
             </div>
 
-            <div class="ConnectionsTotal">
+            <div class="color1 ConnectionsTotal">
                 <asp:Label CssClass="Number" ID="lblConnectionsTotal" runat="server" Text="0"></asp:Label>
                 <br />
                 <asp:Label ID="lblConnectionsTotalText" runat="server" Text="TOTAL CONNECTIONS"></asp:Label>
@@ -156,12 +156,12 @@
         <hr class="SecondLine"/>
 
         <div class="Tasks">
-            <div class="TaskName">
+            <div class="color2 TaskName">
                 <ul>
                     <li>TASK MANAGEMENT</li>
                 </ul>
             </div>
-            <div class="TasksGrid">
+            <div class="color1 TasksGrid">
                 <div class="Grid">
                     <br />
                     <br />
