@@ -682,13 +682,12 @@ body, html, form {
     border-bottom:rgba(255, 255, 255, 0.06);
 }
 
-.Dashboard .TasksGrid a{
+.Dashboard .TasksGrid a {
     color: rgb(215, 215, 215);
-    text-decoration:none;
+    text-decoration: none;
 }
 
 .Dashboard .TasksGrid input,select{
-    background-color:rgba(0, 0, 0, 0.00);
     color: rgb(215, 215, 215);
     border-color:rgb(215, 215, 215);
     font-size:15px;

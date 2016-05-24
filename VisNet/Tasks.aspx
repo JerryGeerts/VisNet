@@ -211,7 +211,7 @@
                         <tr>
                             <td class="auto-style2">&nbsp;</td>
                             <td>
-                    <asp:Button ID="btnSubmit" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="btnSubmit" cssClass="color2" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" />
                             </td>
                         </tr>
                     </table>
@@ -220,7 +220,7 @@
                     <br />
                     <br />
                     <div class="Grid">
-                        <asp:GridView cssClass="grdTask" ID="grdTask" runat="server" onrowdatabound="grdTask_RowDataBound" AutoGenerateColumns="False" style="margin-right: 0px" OnRowDeleting="grdTask_RowDeleting" Width="1563px">
+                        <asp:GridView cssClass="grdTask color2" ID="grdTask" runat="server" onrowdatabound="grdTask_RowDataBound" AutoGenerateColumns="False" style="margin-right: 0px" OnRowDeleting="grdTask_RowDeleting" Width="1563px">
                             <Columns>
                                 <asp:TemplateField HeaderText="NO.">
                                     <ItemTemplate>

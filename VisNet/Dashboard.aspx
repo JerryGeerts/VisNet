@@ -262,7 +262,7 @@
                 </div>
                 <div class="color1 OnlineNowGraph">
                     <div class="Grid">
-                        <asp:GridView ID="grdOnline" runat="server" onrowdatabound="grdOnline_RowDataBound">
+                        <asp:GridView cssClass="color2" ID="grdOnline" runat="server" onrowdatabound="grdOnline_RowDataBound">
                         </asp:GridView>
                     </div>
                 </div>

