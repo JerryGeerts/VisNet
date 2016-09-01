@@ -211,12 +211,12 @@
                         <tr>
                             <td class="auto-style2">&nbsp;</td>
                             <td>
-                    <asp:Button ID="btnSubmit" cssClass="color2" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" />
+                    <asp:Button ID="btnSubmit" cssClass="color2" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" UseSubmitBehavior="False" />
                             </td>
                         </tr>
                     </table>
                     <br />
-                    <asp:Label ID="lblError" runat="server" Text=""></asp:Label>
+                    <asp:Label ID="lblError" runat="server"></asp:Label>
                     <br />
                     <br />
                     <div class="Grid">

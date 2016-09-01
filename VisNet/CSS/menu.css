@@ -309,6 +309,10 @@ body, html, form {
         width: 100%;
     }
 
+.Dashboard .AmountGraphs li:first-child{
+    margin-top:15px;
+}
+
 .Dashboard .AmountGraphs ul {
             font-size: 14px;
             margin-left: 10px;
@@ -521,7 +525,7 @@ body, html, form {
 }
 
 .Dashboard .Tasks .TasksGrid{
-    height:740px;
+    height:765px;
 }
 
 .Dashboard .Tasks #ddTask{
