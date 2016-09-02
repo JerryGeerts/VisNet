@@ -259,7 +259,7 @@
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="RUNNING AMOUNT">
                                     <ItemTemplate>
-                                        <asp:Label ID="lblRunning" runat="server" Text='<%# Eval("Ran") %>'></asp:Label>
+                                        <asp:Label ID="lblRunning" runat="server" Text='<%# Eval("Running") %>'></asp:Label>
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:TemplateField HeaderText="FILTER">

