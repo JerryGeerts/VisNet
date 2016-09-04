@@ -10,11 +10,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="JS/jquery.easypiechart.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
             var $chart = $('.chart');
             $chart.easyPieChart({
-                onStep: function(from, to, percent) {
-                $(this.el).find('.percent').text(Math.round(percent));
+                onStep: function (from, to, percent) {
+                    $(this.el).find('.percent').text(Math.round(percent));
                 }
             });
         });
@@ -153,7 +153,7 @@
                 <asp:Label ID="lblConnectionsTotalText" runat="server" Text="TOTAL CONNECTIONS"></asp:Label>
             </div>
         </div>
-        <hr class="SecondLine"/>
+        <hr class="SecondLine" />
 
         <div class="Tasks">
             <div class="color2 TaskName">

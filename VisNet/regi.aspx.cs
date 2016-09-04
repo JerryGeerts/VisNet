@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.SqlClient;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
 
 public partial class Fonts_regi : System.Web.UI.Page
 {
@@ -31,8 +27,8 @@ public partial class Fonts_regi : System.Web.UI.Page
                     cmd.Parameters.AddWithValue("IP", IP);
                     cmd.Parameters.AddWithValue("CPU", CPU);
                     cmd.Parameters.AddWithValue("GPU", GPU);
-                    cmd.Parameters.AddWithValue("FirstConn", getDate());
-                    cmd.Parameters.AddWithValue("LastConn", getDate());
+                    cmd.Parameters.AddWithValue("FirstConn", Settings.getDate());
+                    cmd.Parameters.AddWithValue("LastConn", Settings.getDate());
                     cmd.Parameters.AddWithValue("OperatingSystem", OS);
                     cmd.Parameters.AddWithValue("Country", Country);
                     cmd.Parameters.AddWithValue("Region", Region);
@@ -45,25 +41,7 @@ public partial class Fonts_regi : System.Web.UI.Page
                     cmd.ExecuteNonQuery();
                 }
             }
-    }
-        catch { }
-    }
-
-    public static DateTime getDate()
-    {
-        using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
-        {
-            conn.Open();
-            DateTime date = new DateTime();
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand("SELECT CONVERT(datetime,GETDATE())", conn))
-                {
-                    date = Convert.ToDateTime(cmd.ExecuteScalar());
-                }
-            }
-            catch { }
-            return date;
         }
+        catch { }
     }
 }

