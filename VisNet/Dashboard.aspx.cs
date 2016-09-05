@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Data.SqlClient;
 using System.Data;
-using System.Web;
+using System.Data.SqlClient;
 using System.Web.UI.WebControls;
 
 public partial class Home : System.Web.UI.Page
 {
     public string kleurSyntax;
     public string procentSyntax;
+
     public void Page_Load(object sender, EventArgs e)
     {
         if ((Session["Check"] == null) || (Convert.ToBoolean(Session["Check"]) == false))
@@ -67,9 +67,8 @@ public partial class Home : System.Web.UI.Page
             {
                 connMonth = (int)cmd.ExecuteScalar();
                 lblConnectionsMonth.Text = connMonth.ToString();
-                connMonthPre = Math.Round((double)(100 * connMonth) / connTotal , 1);
+                connMonthPre = Math.Round((double)(100 * connMonth) / connTotal, 1);
                 connMonthPrec.Text = "data-percent=\"" + connMonthPre + "\"";
-
             }
 
             using (SqlCommand cmd = new SqlCommand("select count(distinct Country) from bots", conn))
@@ -81,7 +80,7 @@ public partial class Home : System.Web.UI.Page
             int[] landAantal = new int[amountOfCountrys];
 
             for (int i = 1; i < amountOfCountrys; i++)
-            { 
+            {
                 using (SqlCommand cmd = new SqlCommand("select Country from(select distinct Country, DENSE_RANK() over (order by country) as rownum from bots) as tbl where tbl.rownum = @i", conn))
                 {
                     cmd.Parameters.AddWithValue("i", i);
@@ -94,7 +93,7 @@ public partial class Home : System.Web.UI.Page
                     landAantal[i] = (int)cmd.ExecuteScalar();
                 }
 
-                procent = Math.Round((double)(100 * landAantal[i]) / connTotal , 1);
+                procent = Math.Round((double)(100 * landAantal[i]) / connTotal, 1);
 
                 kleurSyntax += "\"" + land[i] + "\" " + ":" + landAantal[i] + ", ";
                 procentSyntax += "\"" + land[i] + "\" " + ":" + procent + ", ";
@@ -128,7 +127,8 @@ public partial class Home : System.Web.UI.Page
             }
         }
     }
-    protected void grdOnline_RowDataBound (object sender, GridViewRowEventArgs e)
+
+    protected void grdOnline_RowDataBound(object sender, GridViewRowEventArgs e)
     {
         if (e.Row.RowType == DataControlRowType.Header)
         {
@@ -177,7 +177,4 @@ public partial class Home : System.Web.UI.Page
             tc.Attributes["style"] = "border-right:none; border-left: none; border-top: none;text-align:left;";
         }
     }
-
-
-
 }

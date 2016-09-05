@@ -44,4 +44,22 @@ public partial class Fonts_regi : System.Web.UI.Page
         }
         catch { }
     }
+
+    public static DateTime getDate()
+    {
+        using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
+        {
+            conn.Open();
+            DateTime date = new DateTime();
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("SELECT CONVERT(datetime,GETDATE())", conn))
+                {
+                    date = Convert.ToDateTime(cmd.ExecuteScalar());
+                }
+            }
+            catch { }
+            return date;
+        }
+    }
 }

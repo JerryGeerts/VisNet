@@ -10,11 +10,11 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="JS/jquery.easypiechart.min.js"></script>
     <script>
-        $(function() {
+        $(function () {
             var $chart = $('.chart');
             $chart.easyPieChart({
-                onStep: function(from, to, percent) {
-                $(this.el).find('.percent').text(Math.round(percent));
+                onStep: function (from, to, percent) {
+                    $(this.el).find('.percent').text(Math.round(percent));
                 }
             });
         });
@@ -24,18 +24,18 @@
     <script src="JS/jquery-jvectormap-2.0.3.min.js"></script>
     <script src="JS/jquery-jvectormap-world-mill-en.js"></script>
     <script>
-    jQuery.noConflict();
-    jQuery(function(){
-        var $ = jQuery;
-        var proc = {<%=procentSyntax%>}
+        jQuery.noConflict();
+        jQuery(function () {
+            var $ = jQuery;
+            var proc = {<%=procentSyntax%> }
         $('#map1').vectorMap({
-        backgroundColor: "",
-        map: 'world_mill_en',
-        series: {           
-          regions: [{
-            scale: ['#ADC093', '#23312B'],
-            normalizeFunction: 'polynomial',
-            values: {
+            backgroundColor: "",
+            map: 'world_mill_en',
+            series: {
+                regions: [{
+                    scale: ['#ADC093', '#23312B'],
+                    normalizeFunction: 'polynomial',
+                    values: {
                 <%=kleurSyntax%>
             }
           }]
@@ -48,7 +48,7 @@
                     el.html(el.html() + ' ( ' + proc[code] + ' % )');
                 }
             }
-      });
+        });
     })
   </script>
 </head>
@@ -186,7 +186,7 @@
             </div>
         </div>
 
-       <hr class="SecondLine"/>
+       <hr class="SecondLine" />
 
         <div class="Charts">
             <div class="CountryMap">

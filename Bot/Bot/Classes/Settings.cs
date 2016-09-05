@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bot.Classes
+﻿namespace Bot.Classes
 {
-    class Settings
+    internal class Settings
     {
         public static string panel = "http://localhost:3951";
         public static string Botv = "0.1";

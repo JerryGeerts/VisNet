@@ -507,10 +507,11 @@ body, html, form {
     color: rgb(215, 215, 215);
 }
 
-.Dashboard .Tasks #lblDropdown,#lblFilter,#lblAmount{
+.Dashboard .Tasks #lblDropdown,#lblFilter,#lblAmount,#lblPar1,#lblPar2,#lblPar3,#lblPar4{
     float:right;
     margin-right:15px;
-    margin-left:80px;
+    margin-left:100px;
+    margin-top:2px;
 }
 
 .Dashboard .Tasks #lblError{
@@ -536,14 +537,20 @@ body, html, form {
     padding-left: 10px;
 }
 
-.Dashboard .Tasks #txtFilter,#txtAmount{
+.Dashboard .Tasks #txtFilter,#txtAmount,#txtPar1,#txtPar2,#txtPar3,#txtPar4{
     background-color:rgba(0, 0, 0, 0.00);
     color: rgb(215, 215, 215);
     border-color:rgb(215, 215, 215);
     border: 1px solid;
-    margin-top:5px;
+    margin-top:3px;
     font-size:15px;
     padding-left: 10px;
+    padding-top: 0px;
+}
+
+.Dashboard .Tasks #txtPar4,.Dashboard .Tasks #lblPar4{
+    padding-top: 0px;
+    margin-top:-10px;
 }
 
 .Dashboard .Tasks #ddTask option{
