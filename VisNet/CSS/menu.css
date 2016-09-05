@@ -257,7 +257,7 @@ body, html, form {
         background-color: rgba(18, 18, 18, 0.80);
         color: rgb(215, 215, 215);
         float: left;
-        height: 979px;
+        height: 1080px;
         margin: 0;
         padding: 0;
         width: 2.65%;
@@ -305,7 +305,7 @@ body, html, form {
 
 .Dashboard .AmountGraphs {
         float: left;
-        height: 943px;
+        height: 1080px;
         width: 100%;
     }
 
