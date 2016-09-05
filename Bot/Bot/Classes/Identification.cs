@@ -1,5 +1,4 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Management;
 using System.Net;
 using System.Security.Principal;
@@ -7,7 +6,7 @@ using System.Xml;
 
 namespace Bot.Classes
 {
-    class Identification
+    internal class Identification
     {
         public static string getUsername()
         {
@@ -61,7 +60,7 @@ namespace Bot.Classes
             ManagementObjectSearcher searcher = new ManagementObjectSearcher("SELECT * FROM Win32_DisplayConfiguration");
             foreach (ManagementObject mo in searcher.Get())
             {
-                if(GPU == "")
+                if (GPU == "")
                 {
                     foreach (PropertyData property in mo.Properties)
                     {
@@ -128,4 +127,3 @@ namespace Bot.Classes
         }
     }
 }
-

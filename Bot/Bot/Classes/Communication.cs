@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Bot.Classes
+﻿namespace Bot.Classes
 {
-    class Communication
+    internal class Communication
     {
-
     }
 }
