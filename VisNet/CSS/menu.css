@@ -710,3 +710,34 @@ body, html, form {
     opacity: 0.6;
     color:grey;
 }
+
+/*Calander*/
+
+.fc-icon, body .fc{
+    margin-left:17px;
+    margin-top:17px;
+    width:84.5%;
+    float:left;
+
+}
+
+.fc-toolbar{
+    position:absolute;
+    margin-top:770px;
+    font-size:10px;
+    margin-left:20px;
+    color: rgb(215, 215, 215);
+    font-family:Arial;
+}
+
+.fc-day{
+    background-color:rgba(18,18,18,0.4);
+}
+
+.fc-unthemed .fc-today{
+    background-color:rgba(18,18,18,0.6);
+}
+
+.fc-day{
+    border-width:20px;
+}
