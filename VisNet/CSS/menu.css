@@ -714,20 +714,23 @@ body, html, form {
 /*Calander*/
 
 .fc-icon, body .fc{
-    margin-left:17px;
-    margin-top:17px;
-    width:84.5%;
+    margin-left:13px;
+    margin-top:10px;
+    width:84.89%;
     float:left;
 
 }
 
 .fc-toolbar{
+    z-index:0;
     position:absolute;
-    margin-top:770px;
+    margin-top:750px;
     font-size:10px;
-    margin-left:20px;
+    margin-left:721px;
     color: rgb(215, 215, 215);
     font-family:Arial;
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
 }
 
 .fc-day{
@@ -738,6 +741,97 @@ body, html, form {
     background-color:rgba(18,18,18,0.6);
 }
 
-.fc-day{
-    border-width:20px;
+.fc th{
+    color: rgb(215, 215, 215);
+    background-color:rgba(18,18,18,0.6);
+    font-family:Arial;
+    font-weight:100;
+    height:20px;
+}
+
+.fc td, .fc th {
+    padding-bottom: 0px;
+    border-bottom-width: 0px;
+    border:0px;
+}
+
+.fc-row table thead tr{
+    height:25px;
+    margin-bottom:-50px;
+    border-bottom-width: 0px;
+}
+
+.fc-day-top{
+    border-top-width: 0px;
+}
+
+.fc-row table thead tr th{
+    border-left:rgba(18,18,18,0.4);
+    border-right:rgba(18,18,18,0.4);
+    margin-left:-4px;
+    font-size:14px;
+    padding-top:3px;
+}
+
+.fc-head-container td{
+    border-bottom-width: 0px;
+}
+
+.fc-head-container table{
+    border-spacing: 0px;
+    border-collapse: separate;
+    border:0;
+    padding:0;
+}
+
+.fc-day-grid-container{
+    margin-left: -2px;
+    width: 100.2%;
+}
+
+.fc-content{
+    background-color:rgba(18,18,18,0.0);
+}
+
+.fc-event-container a{
+    background-color:rgba(18,18,18,0.4);
+    border-color:rgba(18,18,18,0.4);
+    border:none;
+    border-radius:0px;
+    color:rgb(215,215,215);
+    width:92%;
+    margin:auto;
+}
+
+.fc-day-top a{
+    color:rgb(215,215,215);
+    
+}
+
+.fc-content span{
+    margin-left:10px;
+}
+
+.bottomborder{ 
+    margin-top:755px;
+    margin-left:282px;
+    background-color:rgba(18,18,18,0.6);
+    width:84.65%;
+    position:relative;
+    height:30px;
+    z-index:-1
+}
+
+.fc-toolbar button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(215,215,215);
+}
+
+.fc-right{
+    margin-left:15px;
+}
+
+.fc-left{
+    margin-right:15px;
 }

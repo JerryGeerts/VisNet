@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Calander.aspx.cs" Inherits="Calander" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="Calender.aspx.cs" Inherits="Calander" %>
 
 <html>
 <head runat="server">
@@ -7,12 +7,10 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="JS/jquery.easypiechart.min.js"></script>
     <meta charset="utf-8" />
-    <link href="CSS/fullcalendar.css" rel="stylesheet" />
     <link href='CSS/fullcalendar.print.css' rel='stylesheet' media='print' />
     <link href="CSS/fullcalendar.min.css" rel="stylesheet" />
     <script src="JS/moment.min.js"></script>
     <script src="JS/fullcalendar.min.js"></script>
-    <script src="JS/fullcalendar.js"></script>
 
     <script>
 
@@ -67,7 +65,7 @@
     	                center: 'title',
     	                right: 'next'
     	            },
-                    height:1550,
+                    height:1540,
     	            defaultDate: '2016-09-12',
     	            navLinks: true, // can click day/week names to navigate views
     	            eventLimit: true, // allow "more" link when too many events
@@ -225,7 +223,7 @@
        <hr class="SecondLine" />
 
         <div id='calendar'></div>
-
+        <div class="bottomborder"></div>
     </form>
 </body>
 </html>
