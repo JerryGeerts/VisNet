@@ -724,7 +724,7 @@ body, html, form {
 .fc-toolbar{
     z-index:0;
     position:absolute;
-    margin-top:750px;
+    margin-top:765px;
     font-size:10px;
     margin-left:721px;
     color: rgb(215, 215, 215);
@@ -794,12 +794,10 @@ body, html, form {
 }
 
 .fc-event-container a{
-    background-color:rgba(18,18,18,0.4);
     border-color:rgba(18,18,18,0.4);
     border:none;
     border-radius:0px;
     color:rgb(215,215,215);
-    width:92%;
     margin:auto;
 }
 
@@ -813,7 +811,7 @@ body, html, form {
 }
 
 .bottomborder{ 
-    margin-top:755px;
+    margin-top:770px;
     margin-left:282px;
     background-color:rgba(18,18,18,0.6);
     width:84.65%;
@@ -834,4 +832,13 @@ body, html, form {
 
 .fc-left{
     margin-right:15px;
+}
+
+.fc-header .fc-title{
+    color:rgb(218,218,218);
+    padding-left:14px;
+}
+
+.fc-more{
+    padding-left:10px;
 }

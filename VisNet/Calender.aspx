@@ -65,16 +65,16 @@
     	                center: 'title',
     	                right: 'next'
     	            },
-                    height:1540,
+    	            views: {
+    	                month: {
+    	                    columnFormat: 'dddd'
+    	                }
+    	            },
+                    height:1555,
     	            defaultDate: '2016-09-12',
     	            navLinks: true, // can click day/week names to navigate views
     	            eventLimit: true, // allow "more" link when too many events
-			events: [
-				{
-				    title: 'All Day Event',
-				    start: '2016-09-01'
-				},
-			]
+			events: [<%=CalenderSyn%>]
 		});
 		
 	});
@@ -102,7 +102,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="Dashboard.aspx">
+                    <a href="Calender.aspx">
                         <img id="Calender" src="Image/Calender.png" />
                     </a>
                 </li>

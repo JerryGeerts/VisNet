@@ -145,7 +145,5 @@ namespace Bot.Classes
             writer.Dispose();
             GC.Collect();
         }
-
-        
     }
 }

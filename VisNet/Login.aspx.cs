@@ -124,6 +124,7 @@ public partial class Login : System.Web.UI.Page
 
                             Session["Check"] = true;
                             Session["Registered"] = false;
+                            Session["Username"] = txtUsername.Text;
                             Response.Redirect("Dashboard.aspx");
                         }
                     }

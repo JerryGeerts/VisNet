@@ -40,16 +40,16 @@
 }
 
 .fc-unthemed .fc-popover {
-    background-color: #fff;
+    background-color: rgba(18,18,18,0.9);
 }
 
-    .fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
-        background: #eee;
-    }
+.fc-unthemed .fc-divider, .fc-unthemed .fc-list-heading td, .fc-unthemed .fc-popover .fc-header {
+    background-color: rgba(18,18,18,0.0);
+}
 
-        .fc-unthemed .fc-popover .fc-header .fc-close {
-            color: #666;
-        }
+.fc-unthemed .fc-popover .fc-header .fc-close {
+    color: #666;
+}
 
 
 .fc-highlight {
@@ -128,7 +128,8 @@
 .fc-icon-x:after {
     content: "\000D7";
     font-size: 200%;
-    top: 6%;
+    top: 0%;
+    margin-left:250px;
 }
 
 .fc button {
@@ -212,7 +213,6 @@
 
 .fc-popover {
     position: absolute;
-    box-shadow: 0 2px 6px rgba(0,0,0,.15);
 }
 
     .fc-popover .fc-header {
@@ -372,7 +372,6 @@ a[data-goto]:hover {
 }
 
 .fc-event, .fc-event-dot {
-    background-color: #3a87ad;
 }
 
     .fc-event, .fc-event:hover, .ui-widget .fc-event {
@@ -547,7 +546,7 @@ a.fc-more {
 
 .fc-more-popover {
     z-index: 2;
-    width: 220px;
+    width: 20%;
 }
 
     .fc-more-popover .fc-event-container {
